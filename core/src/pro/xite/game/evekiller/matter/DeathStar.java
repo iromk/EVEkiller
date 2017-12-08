@@ -13,10 +13,6 @@ import pro.xite.game.evekiller.darkmatter.Universe;
 public class DeathStar extends GameMatter {
 
     private static final String deathstarImageFilename = "deathstar.png";
-    private final float speedXmin = 2f;
-    private final float speedXmax = 6f;
-    private final float speedYmin = 0.5f;
-    private final float speedYmax = 2f;
 
     /**
      * Center of gravity vector
@@ -27,46 +23,40 @@ public class DeathStar extends GameMatter {
      * Current position, central point related
      */
     Vector2 cur;
+
+    Vector2 delta;
+
+    Vector2 destiny;
     float v,a;
-    float speedX, speedY;
 
     public DeathStar(Universe spriteBatch) {
         this.texture = new Texture(deathstarImageFilename);
         cg = new Vector2(texture.getWidth()/2, texture.getHeight()/2);
         this.universe = spriteBatch;
         cur = new Vector2(universe.width, universe.height).scl(0.5f).sub(cg);
-//        cur = new Vector2((universe.width-texture.getWidth())/2, (universe.height-texture.getHeight())/2);
-//        resetPosition();
+        v = 1f; delta = new Vector2();
+        System.out.println(cur.toString());
+        destiny = new Vector2();
     }
 
     @Override
     public void draw() {
-        universe.draw(texture, getCurX(), getCurY());
+        move();
+        universe.draw(texture, cur.x, cur.y);
     }
 
-    public float getCurX() {
-//        if (cur.x > Gdx.graphics.getWidth() || cur.x < -64f) resetPosition();
-//        else cur.x += speedX;
-        return cur.x;
+    private void move() {
+        if(destiny.len() >0 && !cur.epsilonEquals(destiny, 1f)) {
+            delta.setLength(v);
+            v+=0.1f;
+            cur.add(delta);
+        }
     }
 
     public void moveTo(Vector2 dst) {
-        cur = dst.sub(cg);
+        destiny = dst.sub(cg);
+        delta = destiny.cpy().sub(cur);//.setLength(v);
     }
 
-    public float getCurY() {
-//        if (cur.y > Gdx.graphics.getHeight() || cur.y < -64f) resetPosition();
-//        else cur.y += speedY;
-        return cur.y;
-    }
-
-    private void resetPosition() {
-        cur.x = -64f;
-        cur.y = Gdx.graphics.getHeight() / 2 - 32f;
-
-        speedX = (float)(Math.random() * (speedXmax - speedXmin)) + speedXmin;
-        speedY = (float)((Math.random() - 0.5f) * (speedYmax - speedYmin));
-        speedY += (speedY > 0 ? speedYmin : -speedYmin);
-    }
 
 }
