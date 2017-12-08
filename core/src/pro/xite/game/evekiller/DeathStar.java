@@ -2,6 +2,7 @@ package pro.xite.game.evekiller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
  * Created by Roman Syrchin on 12/6/17.
@@ -15,12 +16,19 @@ public class DeathStar extends Texture {
     private final float speedYmin = 0.5f;
     private final float speedYmax = 2f;
 
+    SpriteBatch spriteBatch;
+
     float curX, curY;
     float speedX, speedY;
 
-    public DeathStar() {
+    public DeathStar(SpriteBatch spriteBatch) {
         super(deathstarImageFilename);
+        this.spriteBatch = spriteBatch;
         resetPosition();
+    }
+
+    public void render() {
+        spriteBatch.draw(this, getCurX(), getCurY());
     }
 
     public float getCurX() {

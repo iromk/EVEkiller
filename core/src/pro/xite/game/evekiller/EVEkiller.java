@@ -9,18 +9,15 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class EVEkiller extends ApplicationAdapter {
 	SpriteBatch batch;
-	String ffaGalaxyImageFilename = "farfarawaygalaxy.jpg";
-	Texture ffaGalaxy;
-	TextureRegion ffaGalaxyCrop;
 	DeathStar deathStar;
+	FFAGalaxy ffaGalaxy;
 
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		ffaGalaxy = new Texture(ffaGalaxyImageFilename);
-		ffaGalaxyCrop = getRandomTextureRegion(ffaGalaxy);
-		deathStar = new DeathStar();
+		ffaGalaxy = new FFAGalaxy(batch);
+		deathStar = new DeathStar(batch);
 	}
 
 	@Override
@@ -28,8 +25,8 @@ public class EVEkiller extends ApplicationAdapter {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-        batch.draw(ffaGalaxyCrop, 0f, 0f);
-        batch.draw(deathStar, deathStar.getCurX(), deathStar.getCurY());
+        ffaGalaxy.render();
+        deathStar.render();
         batch.end();
 	}
 	
@@ -37,11 +34,7 @@ public class EVEkiller extends ApplicationAdapter {
 	public void dispose () {
 		batch.dispose();
 		ffaGalaxy.dispose();
+		deathStar.dispose();
 	}
 
-	private TextureRegion getRandomTextureRegion(Texture texture) {
-	    int x = (int) (Math.random() * (texture.getWidth() - Gdx.graphics.getWidth()));
-        int y = (int) (Math.random() * (texture.getHeight() - Gdx.graphics.getHeight()));
-	    return new TextureRegion(texture, x, y, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-    }
 }
