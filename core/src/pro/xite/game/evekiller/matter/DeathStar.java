@@ -2,7 +2,6 @@ package pro.xite.game.evekiller.matter;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 import pro.xite.game.evekiller.darkmatter.Universe;
@@ -19,15 +18,24 @@ public class DeathStar extends GameMatter {
     private final float speedYmin = 0.5f;
     private final float speedYmax = 2f;
 
+    /**
+     * Center of gravity vector
+     */
+    private Vector2 cg;
+
+    /**
+     * Current position, central point related
+     */
     Vector2 cur;
     float v,a;
-//    float curX, curY;
     float speedX, speedY;
 
     public DeathStar(Universe spriteBatch) {
         this.texture = new Texture(deathstarImageFilename);
+        cg = new Vector2(texture.getWidth()/2, texture.getHeight()/2);
         this.universe = spriteBatch;
-        cur = new Vector2((universe.width-texture.getWidth())/2, (universe.height-texture.getHeight())/2);
+        cur = new Vector2(universe.width, universe.height).scl(0.5f).sub(cg);
+//        cur = new Vector2((universe.width-texture.getWidth())/2, (universe.height-texture.getHeight())/2);
 //        resetPosition();
     }
 
@@ -43,7 +51,7 @@ public class DeathStar extends GameMatter {
     }
 
     public void moveTo(Vector2 dst) {
-        cur = dst;
+        cur = dst.sub(cg);
     }
 
     public float getCurY() {

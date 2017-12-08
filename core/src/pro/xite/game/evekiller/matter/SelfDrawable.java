@@ -8,7 +8,5 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public interface SelfDrawable {
 
-//    SpriteBatch spriteBatch;
-
     public void draw();
 }

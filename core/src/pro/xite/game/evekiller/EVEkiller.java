@@ -42,8 +42,8 @@ public class EVEkiller extends ApplicationAdapter {
 
 	@Override
 	public void dispose() {
-		ffaGalaxy.dispose();
-		deathStar.dispose();
+//		ffaGalaxy.dispose();
+//		deathStar.dispose();
 		universeBatch.dispose();
 	}
 
