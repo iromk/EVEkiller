@@ -1,8 +1,14 @@
 package pro.xite.game.evekiller;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
+import pro.xite.game.evekiller.darkmatter.MassEffect;
 import pro.xite.game.evekiller.matter.DeathStar;
 import pro.xite.game.evekiller.matter.FFAGalaxy;
 import pro.xite.game.evekiller.matter.SelfDrawable;
@@ -18,6 +24,7 @@ public class EVEkiller extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		ffaGalaxy = new FFAGalaxy(batch);
 		deathStar = new DeathStar(batch);
+		Gdx.input.setInputProcessor(new GestureDetector(new MassEffect()));
 	}
 
 	@Override
