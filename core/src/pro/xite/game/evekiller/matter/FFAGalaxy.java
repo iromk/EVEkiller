@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import pro.xite.game.evekiller.darkmatter.Universe;
+
 /**
  * Created by Roman Syrchin on 12/8/17.
  */
@@ -14,15 +16,15 @@ public class FFAGalaxy extends GameMatter {
     static private final String ffaGalaxyImageFilename = "farfarawaygalaxy.jpg";
     TextureRegion crop;
 
-    public FFAGalaxy(SpriteBatch spriteBatch) {
+    public FFAGalaxy(Universe spriteBatch) {
 
         this.texture = new Texture(ffaGalaxyImageFilename);
-        this.batch = spriteBatch;
+        this.universe = spriteBatch;
         crop = getRandomTextureRegion();
     }
 
     public void draw() {
-        batch.draw(crop, 0,0);
+        universe.draw(crop, 0,0);
     }
 
     private TextureRegion getRandomTextureRegion() {

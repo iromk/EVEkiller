@@ -3,6 +3,9 @@ package pro.xite.game.evekiller.matter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+
+import pro.xite.game.evekiller.darkmatter.Universe;
 
 /**
  * Created by Roman Syrchin on 12/6/17.
@@ -16,35 +19,43 @@ public class DeathStar extends GameMatter {
     private final float speedYmin = 0.5f;
     private final float speedYmax = 2f;
 
-    float curX, curY;
+    Vector2 cur;
+    float v,a;
+//    float curX, curY;
     float speedX, speedY;
 
-    public DeathStar(SpriteBatch spriteBatch) {
+    public DeathStar(Universe spriteBatch) {
         this.texture = new Texture(deathstarImageFilename);
-        this.batch = spriteBatch;
-        resetPosition();
+        this.universe = spriteBatch;
+        cur = new Vector2((universe.width-texture.getWidth())/2, (universe.height-texture.getHeight())/2);
+//        resetPosition();
     }
 
     @Override
     public void draw() {
-        batch.draw(texture, getCurX(), getCurY());
+        universe.draw(texture, getCurX(), getCurY());
     }
 
     public float getCurX() {
-        if (curX > Gdx.graphics.getWidth() || curX < -64f) resetPosition();
-        else curX += speedX;
-        return curX;
+//        if (cur.x > Gdx.graphics.getWidth() || cur.x < -64f) resetPosition();
+//        else cur.x += speedX;
+        return cur.x;
+    }
+
+    public void moveTo(Vector2 dst) {
+        cur = dst;
     }
 
     public float getCurY() {
-        if (curY > Gdx.graphics.getHeight() || curY < -64f) resetPosition();
-        else curY += speedY;
-        return curY;
+//        if (cur.y > Gdx.graphics.getHeight() || cur.y < -64f) resetPosition();
+//        else cur.y += speedY;
+        return cur.y;
     }
 
     private void resetPosition() {
-        curX = -64f;
-        curY = Gdx.graphics.getHeight() / 2 - 32f;
+        cur.x = -64f;
+        cur.y = Gdx.graphics.getHeight() / 2 - 32f;
+
         speedX = (float)(Math.random() * (speedXmax - speedXmin)) + speedXmin;
         speedY = (float)((Math.random() - 0.5f) * (speedYmax - speedYmin));
         speedY += (speedY > 0 ? speedYmin : -speedYmin);

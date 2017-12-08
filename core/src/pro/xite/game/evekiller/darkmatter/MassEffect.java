@@ -1,5 +1,6 @@
 package pro.xite.game.evekiller.darkmatter;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 
@@ -9,14 +10,21 @@ import com.badlogic.gdx.math.Vector2;
 
 public class MassEffect implements GestureDetector.GestureListener {
 
-    public MassEffect() {
+//    DeathStar deathStar;
+    Universe universe;
 
+//    public MassEffect(DeathStar deathStar) {
+//        this.deathStar = deathStar;
+//    }
+
+    public MassEffect(Universe universe) {
+        this.universe = universe;
     }
 
     @Override
     public boolean touchDown(float x, float y, int pointer, int button) {
         System.out.println("touchDown!");
-//        gameSpace.moveTo(new Vector2(x,y));
+        universe.setGravitySource(new Vector2(x, Gdx.graphics.getHeight() - y));
         return false;
     }
 
