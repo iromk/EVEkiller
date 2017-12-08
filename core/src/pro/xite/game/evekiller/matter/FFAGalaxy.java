@@ -1,4 +1,4 @@
-package pro.xite.game.evekiller;
+package pro.xite.game.evekiller.matter;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -6,28 +6,23 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
- * Created by nnm on 12/8/17.
+ * Created by Roman Syrchin on 12/8/17.
  */
 
-public class FFAGalaxy extends TextureRegion {
+public class FFAGalaxy extends GameMatter {
 
-    private final String ffaGalaxyImageFilename = "farfarawaygalaxy.jpg";
-    Texture texture;
+    static private final String ffaGalaxyImageFilename = "farfarawaygalaxy.jpg";
     TextureRegion crop;
-    SpriteBatch spriteBatch;
 
     public FFAGalaxy(SpriteBatch spriteBatch) {
-        this.spriteBatch = spriteBatch;
-        texture = new Texture(ffaGalaxyImageFilename);
+
+        this.texture = new Texture(ffaGalaxyImageFilename);
+        this.batch = spriteBatch;
         crop = getRandomTextureRegion();
     }
 
-    public void render() {
-        spriteBatch.draw(crop, 0,0);
-    }
-
-    public void dispose() {
-        texture.dispose();
+    public void draw() {
+        batch.draw(crop, 0,0);
     }
 
     private TextureRegion getRandomTextureRegion() {
