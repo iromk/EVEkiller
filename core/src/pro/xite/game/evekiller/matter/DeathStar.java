@@ -1,6 +1,5 @@
 package pro.xite.game.evekiller.matter;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
@@ -22,40 +21,56 @@ public class DeathStar extends GameMatter {
     /**
      * Current position, central point related
      */
-    Vector2 cur;
+    Vector2 position;
 
     Vector2 delta;
+    Vector2 slowdown;
 
-    Vector2 destiny;
+    Vector2 destination;
     float v,a;
 
     public DeathStar(Universe spriteBatch) {
         this.texture = new Texture(deathstarImageFilename);
         cg = new Vector2(texture.getWidth()/2, texture.getHeight()/2);
         this.universe = spriteBatch;
-        cur = new Vector2(universe.width, universe.height).scl(0.5f).sub(cg);
-        v = 1f; delta = new Vector2();
-        System.out.println(cur.toString());
-        destiny = new Vector2();
+        position = new Vector2(universe.width, universe.height).scl(0.5f).sub(cg);
+        v = 0f; a = 0f; delta = new Vector2();
+        System.out.println(position.toString());
+        destination = new Vector2();
+        slowdown = new Vector2();
     }
 
     @Override
     public void draw() {
         move();
-        universe.draw(texture, cur.x, cur.y);
+        universe.draw(texture, position.x, position.y);
     }
 
     private void move() {
-        if(destiny.len() >0 && !cur.epsilonEquals(destiny, 1f)) {
-            delta.setLength(v);
-            v+=0.1f;
-            cur.add(delta);
-        }
+        if(delta.len() > 0)
+            if(position.epsilonEquals(destination, 1f)) {
+                position.set(destination.x, destination.y);
+                v = 0f;
+                delta.setZero();
+                destination.setZero();
+            } else {
+                delta.setLength(v);
+                updateVelocity();
+                position.add(delta);
+            }
+    }
+
+    private void updateVelocity() {
+        if(a > 0 && position.epsilonEquals(slowdown, 5f))
+            a = -0.2f;
+        v += a;
     }
 
     public void moveTo(Vector2 dst) {
-        destiny = dst.sub(cg);
-        delta = destiny.cpy().sub(cur);//.setLength(v);
+        destination = dst.sub(cg);
+        delta = destination.cpy().sub(position);
+        slowdown = delta.cpy().scl(0.66f).add(position);
+        v = 1f; a = 0.1f;
     }
 
 
