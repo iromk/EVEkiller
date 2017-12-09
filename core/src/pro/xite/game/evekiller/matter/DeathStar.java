@@ -57,6 +57,7 @@ public class DeathStar extends GameMatter {
                 delta.setLength(v);
                 updateVelocity();
                 position.add(delta);
+                universe.playerMoved(delta);
             }
     }
 

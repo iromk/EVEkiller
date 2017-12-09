@@ -30,6 +30,10 @@ public class Universe extends SpriteBatch {
         deathStar.moveTo(gravity);
     }
 
+    public void playerMoved(Vector2 delta) {
+        ffaGalaxy.moveTo(delta.cpy());
+    }
+
     public void render() {
         render(ffaGalaxy, deathStar);
     }
