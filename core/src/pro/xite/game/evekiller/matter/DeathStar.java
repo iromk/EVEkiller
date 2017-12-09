@@ -35,7 +35,6 @@ public class DeathStar extends GameMatter {
         this.universe = spriteBatch;
         position = new Vector2(universe.width, universe.height).scl(0.5f).sub(cg);
         v = 0f; a = 0f; delta = new Vector2();
-        System.out.println(position.toString());
         destination = new Vector2();
         slowdown = new Vector2();
     }
