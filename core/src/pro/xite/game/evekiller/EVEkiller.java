@@ -1,8 +1,11 @@
 package pro.xite.game.evekiller;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.input.GestureDetector;
+
+import pro.xite.game.evekiller.app.GameScreen;
 import pro.xite.game.evekiller.darkmatter.MassEffect;
 import pro.xite.game.evekiller.darkmatter.Universe;
 
@@ -13,27 +16,11 @@ import pro.xite.game.evekiller.darkmatter.Universe;
  * https://github.com/iromk/EVEkiller
  */
 
-public class EVEkiller extends ApplicationAdapter {
-
-	Universe universeBatch;
-
+public class EVEkiller extends Game {
 
 	@Override
 	public void create() {
-		universeBatch = new Universe();
-		Gdx.input.setInputProcessor(new GestureDetector(new MassEffect(universeBatch)));
-	}
-
-	@Override
-	public void render() {
-		universeBatch.begin();
-		universeBatch.render();
-        universeBatch.end();
-	}
-
-	@Override
-	public void dispose() {
-		universeBatch.dispose();
+		setScreen(new GameScreen());
 	}
 
 }
