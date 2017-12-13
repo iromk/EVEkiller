@@ -22,7 +22,7 @@ public class FFAGalaxy extends GameMatter {
 
         this.texture = new Texture(ffaGalaxyImageFilename);
         this.universe = spriteBatch;
-        position = new Vector2(-100,-100);
+        position = new Vector2(-200,-200);
         crop = getRandomTextureRegion();
     }
 
@@ -31,12 +31,14 @@ public class FFAGalaxy extends GameMatter {
     }
 
     private TextureRegion getRandomTextureRegion() {
-        int x = (int)(Math.random() * (texture.getWidth() - Gdx.graphics.getWidth()) - 200) - 100;
-        int y = (int)(Math.random() * (texture.getHeight() - Gdx.graphics.getHeight()) - 200) - 100;
+//        int x = (int)(Math.random() * (texture.getWidth() - Gdx.graphics.getWidth()) - 200) - 100;
+//        int y = (int)(Math.random() * (texture.getHeight() - Gdx.graphics.getHeight()) - 200) - 100;
+        int x = 0;
+        int y = 0;
 //TODO 100 and 200 consts need to replace with calculated values depending on gdx size and scale factor
 
-        return new TextureRegion(texture, x, y,
-                                         Gdx.graphics.getWidth()+200, Gdx.graphics.getHeight()+200);
+        return new TextureRegion(texture, x, y, //1000,1000);
+                                         Gdx.graphics.getWidth()+400, Gdx.graphics.getHeight()+400);
     }
 
     public void moveTo(Vector2 delta) {

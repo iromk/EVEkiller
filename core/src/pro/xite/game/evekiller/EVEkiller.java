@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.input.GestureDetector;
 
 import pro.xite.game.evekiller.app.GameScreen;
+import pro.xite.game.evekiller.app.MenuScreen;
 import pro.xite.game.evekiller.darkmatter.MassEffect;
 import pro.xite.game.evekiller.darkmatter.Universe;
 
@@ -20,7 +21,8 @@ public class EVEkiller extends Game {
 
 	@Override
 	public void create() {
-		setScreen(new GameScreen());
+
+		setScreen(new MenuScreen(this));
 	}
 
 }
