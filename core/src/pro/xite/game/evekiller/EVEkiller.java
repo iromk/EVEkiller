@@ -1,14 +1,8 @@
 package pro.xite.game.evekiller;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.input.GestureDetector;
 
-import pro.xite.game.evekiller.app.GameScreen;
-import pro.xite.game.evekiller.app.MenuScreen;
-import pro.xite.game.evekiller.darkmatter.MassEffect;
-import pro.xite.game.evekiller.darkmatter.Universe;
+import pro.xite.game.evekiller.app.OpenSpace;
 
 /**
  * EVEkiller is a spaceshooter game.
@@ -22,7 +16,7 @@ public class EVEkiller extends Game {
 	@Override
 	public void create() {
 
-		setScreen(new MenuScreen(this));
+		setScreen(new OpenSpace(this));
 	}
 
 }

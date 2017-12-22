@@ -25,6 +25,7 @@ public class MenuScreen extends Base2DScreen {
     private Texture bgBsod;
 
     public MenuScreen(Game game) {
+        super(game);
         System.out.println("Menu constructor");
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();

@@ -9,9 +9,9 @@ import com.badlogic.gdx.math.Vector2;
 
 public class MassEffect implements GestureDetector.GestureListener {
 
-    Universe universe;
+    oldUniverse universe;
 
-    public MassEffect(Universe universe) {
+    public MassEffect(oldUniverse universe) {
         this.universe = universe;
     }
 

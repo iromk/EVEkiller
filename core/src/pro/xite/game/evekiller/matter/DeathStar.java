@@ -3,7 +3,7 @@ package pro.xite.game.evekiller.matter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
-import pro.xite.game.evekiller.darkmatter.Universe;
+import pro.xite.game.evekiller.darkmatter.oldUniverse;
 
 /**
  * Created by Roman Syrchin on 12/6/17.
@@ -29,14 +29,15 @@ public class DeathStar extends GameMatter {
     Vector2 destination;
     float v,a;
 
-    public DeathStar(Universe spriteBatch) {
-        this.texture = new Texture(deathstarImageFilename);
-        cg = new Vector2(texture.getWidth()/2, texture.getHeight()/2);
-        this.universe = spriteBatch;
-        position = new Vector2(universe.width, universe.height).scl(0.5f).sub(cg);
-        v = 0f; a = 0f; delta = new Vector2();
-        destination = new Vector2();
-        slowdown = new Vector2();
+    public DeathStar(oldUniverse spriteBatch) {
+        super("");
+//        this.texture = new Texture(deathstarImageFilename);
+//        cg = new Vector2(texture.getWidth()/2, texture.getHeight()/2);
+//        this.universe = spriteBatch;
+//        position = new Vector2(universe.width, universe.height).scl(0.5f).sub(cg);
+//        v = 0f; a = 0f; delta = new Vector2();
+//        destination = new Vector2();
+//        slowdown = new Vector2();
     }
 
     @Override
@@ -46,18 +47,18 @@ public class DeathStar extends GameMatter {
     }
 
     private void move() {
-        if(delta.len() > 0)
-            if(position.epsilonEquals(destination, 1f)) {
-                position.set(destination.x, destination.y);
-                v = 0f;
-                delta.setZero();
-                destination.setZero();
-            } else {
-                delta.setLength(v);
-                updateVelocity();
-                position.add(delta);
-                universe.playerMoved(delta);
-            }
+//        if(delta.len() > 0)
+//            if(position.epsilonEquals(destination, 1f)) {
+//                position.set(destination.x, destination.y);
+//                v = 0f;
+//                delta.setZero();
+//                destination.setZero();
+//            } else {
+//                delta.setLength(v);
+//                updateVelocity();
+//                position.add(delta);
+//                universe.playerMoved(delta);
+//            }
     }
 
     private void updateVelocity() {
