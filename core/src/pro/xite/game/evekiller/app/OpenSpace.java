@@ -4,12 +4,15 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.math.Rectangle;
+
 
 import pro.xite.game.evekiller.abstracts.Rect;
 import pro.xite.game.evekiller.darkmatter.Indeterminacy;
 import pro.xite.game.evekiller.darkmatter.MassEffect;
 import pro.xite.game.evekiller.darkmatter.oldUniverse;
 import pro.xite.game.evekiller.matter.FFAGalaxy;
+import pro.xite.game.evekiller.matter.MillenniumFalcon;
 import pro.xite.game.evekiller.matter.Star;
 
 /**
@@ -22,6 +25,7 @@ public class OpenSpace extends Base2DScreen {
 //    Game game;
 
     FFAGalaxy ffaGalaxy;
+    MillenniumFalcon player;
     Star[] stars;
     static final int STARS = 102;
 
@@ -29,6 +33,7 @@ public class OpenSpace extends Base2DScreen {
         super(game);
         ffaGalaxy = new FFAGalaxy(batch);
         stars = new Star[STARS];
+        player = new MillenniumFalcon(batch, worldBounds);
         for (int i = 0; i < STARS; i++) {
             Indeterminacy.nextFloat(-1f, 1f);
             stars[i] = new Star(batch, worldBounds);
@@ -49,12 +54,13 @@ public class OpenSpace extends Base2DScreen {
             stars[i].move(delta);
             stars[i].draw();
         }
+        player.draw();
         batch.end();
 //        game.setScreen(new MenuScreen(game));
     }
 
     @Override
-    protected void resize(Rect worldBounds) {
+    protected void resize(Rectangle worldBounds) {
         if(ffaGalaxy != null)
             ffaGalaxy.resize(worldBounds);
 //        buttonExit.resize(worldBounds);
@@ -64,6 +70,8 @@ public class OpenSpace extends Base2DScreen {
             if(stars[i] != null)
                 stars[i].resize(worldBounds);
         }
+        if(player != null)
+        player.resize(worldBounds);
     }
 
     @Override
@@ -74,6 +82,9 @@ public class OpenSpace extends Base2DScreen {
 
     @Override
     public boolean keyDown(int keycode) {
+        System.out.println("key");
+
+        player.moveLeft();
         return false;
     }
 

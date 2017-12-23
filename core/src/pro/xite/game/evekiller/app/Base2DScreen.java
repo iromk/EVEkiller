@@ -8,7 +8,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Rectangle;
 import pro.xite.game.evekiller.abstracts.*;
+import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
 
 /**
  * Created by Roman Syrchin on 12/12/17.
@@ -17,30 +19,29 @@ import pro.xite.game.evekiller.abstracts.*;
 abstract class Base2DScreen implements Screen, InputProcessor {
 
     protected Game game;
-    private Rect screenBounds; // границы области рисования в пикселях
-    protected Rect worldBounds; // границы проекции мировых координат
-    private Rect glBounds; // дефолтные границы проекции мир - gl
+    private Rectangular screenBounds; // границы области рисования в пикселях
+    protected Rectangular worldBounds; // границы проекции мировых координат
+    private Rectangular glBounds; // дефолтные границы проекции мир - gl
 
     protected Matrix4 worldToGl;
     protected Matrix3 screenToWorld;
 
     Vector2 touch = new Vector2();
-
+    Rectangle a;
     protected SpriteBatch batch;
-
 
     public Base2DScreen(Game game) {
         this.game = game;
-        this.screenBounds = new Rect();
-        this.worldBounds = new Rect();
-        this.glBounds = new Rect(0,0,1f,1f);
+        this.screenBounds = new Rectangular();
+        this.worldBounds = new Rectangular();
+        this.glBounds = new Rectangular(-1f, -1f,2f,2f);
         this.worldToGl = new Matrix4();
         this.screenToWorld = new Matrix3();
         if (this.batch != null) {
             throw new RuntimeException("Повторная установка screen без dispose");
         }
         this.batch = new SpriteBatch();
-        resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+//        resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
     @Override
@@ -56,20 +57,23 @@ abstract class Base2DScreen implements Screen, InputProcessor {
     @Override
     public void resize(int width, int height) {
         screenBounds.setSize(width, height);
-        screenBounds.setLeft(0);
-        screenBounds.setBottom(0);
-
+        screenBounds.x = 0;
+        screenBounds.y = 0;
+        System.out.println("scrn bnds\n" + screenBounds);
+        System.out.println(batch.getProjectionMatrix());
+        System.out.println(batch.getTransformMatrix());
         float aspect = width / (float) height;
-        worldBounds.setHeight(1f);
-        worldBounds.setWidth(1f * aspect);
+        worldBounds.setHeight(300f);
+        worldBounds.setWidth(300f * aspect);
         MatrixUtils.calcTransitionMatrix(worldToGl, worldBounds, glBounds);
+//        System.out.println(worldToGl);
         batch.setProjectionMatrix(worldToGl);
 
         MatrixUtils.calcTransitionMatrix(screenToWorld, screenBounds, worldBounds);
         resize(worldBounds);
     }
 
-    protected void resize(Rect worldBounds) {
+    protected void resize(Rectangle worldBounds) {
 
     }
 
