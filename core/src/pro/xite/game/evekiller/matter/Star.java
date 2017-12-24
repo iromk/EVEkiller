@@ -1,13 +1,8 @@
 package pro.xite.game.evekiller.matter;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-import pro.xite.game.evekiller.abstracts.Rect;
 import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
 import pro.xite.game.evekiller.darkmatter.Indeterminacy;
 import pro.xite.game.evekiller.darkmatter.Movable;
@@ -18,10 +13,10 @@ import pro.xite.game.evekiller.darkmatter.Movable;
 
 public class Star extends GameMatter implements Movable {
 
-
-    private Rectangular worldBounds;
     Vector2 velocity = new Vector2();
 
+
+    private Rectangular worldBounds;
 //    TextureRegion textureRegion;
 
     public Star(SpriteBatch batch, Rectangular worldBounds) {
@@ -30,7 +25,7 @@ public class Star extends GameMatter implements Movable {
         this.worldBounds = worldBounds;
 
 //        setWidthProportion(width);
-        float stellarMagnitude = Indeterminacy.nextFloat(1f, 5f);
+        float stellarMagnitude = Indeterminacy.nextFloat(5.005f, 10.01f);
         setWidth(stellarMagnitude);
         float aspect = texture.getRegionWidth() / (float) texture.getRegionHeight();
         setHeight(stellarMagnitude / aspect);
@@ -50,13 +45,8 @@ public class Star extends GameMatter implements Movable {
 //        setHeight(height);
 //        float aspect = texture.getRegionWidth() / (float) texture.getRegionHeight();
 //        setWidth(height * aspect);
-//        System.out.println(worldBounds);
-     /*   super.setCenter(Indeterminacy.nextFloat(worldBounds.getX(), worldBounds.getRight()),
-                          Indeterminacy.nextFloat(worldBounds.getY(), worldBounds.getBottom()));
-         System.out.println(worldBounds + " " + getCenterX() + ":" + getCenterY()
-                        + " " + getX() + ":" + getY()
-                        + " " + getWidth() + ":" + getHeight());*/
-//        System.out.println();
+        super.setPosition(Indeterminacy.nextFloat(worldBounds.getLeft(), worldBounds.getRight()),
+                          Indeterminacy.nextFloat(worldBounds.getBottom(), worldBounds.getTop()));
 //        float height = worldBounds.getHeight();
 //        setHeight(height);
 //        float aspect = texture.getRegionWidth() / (float) texture.getRegionHeight();
@@ -68,6 +58,22 @@ public class Star extends GameMatter implements Movable {
 
     @Override
     public void draw() {
+//        System.out.println(getLeft()
+//                + " " +
+//                getBottom()
+//                + " " +
+//                halfWidth
+//                + " " +
+//                halfHeight
+//                + " " +
+//                getWidth()
+//                + " " +
+//                getHeight()
+//                + " " +
+//                Gdx.graphics.getWidth()
+//                + " " +
+//                Gdx.graphics.getHeight()
+//        );
 
         universe.draw(
                 texture, // текущий регион
@@ -81,24 +87,15 @@ public class Star extends GameMatter implements Movable {
 
     @Override
     public void move(float deltaTime) {
-        /*
-        System.out.println("vel " + velocity);
-        Vector2 position = getCenter().cpy();
-//        position.add(velocity);
-        System.out.println(position);
-        position.add(velocity);
-//        position.mulAdd(velocity, deltaTime);
-        System.out.println(position);
-        setCenter(position);
-
-        stayInBounds();*/
+        getCenter().mulAdd(velocity, deltaTime);
+        fix();
+        stayInBounds();
     }
 
     private void stayInBounds() {
 //        if(getRight() < worldBounds.getLeft()) setLeft(worldBounds.getRight());
 //        if(getLeft() > worldBounds.getRight()) setRight(worldBounds.getLeft());
-//        if(getTop() < worldBounds.getBottom()) setTop(worldBounds.getTop());
-//        if(!worldBounds.contains(this)) this.y = worldBounds.getHeight();
+        if(getTop() < worldBounds.getBottom()) setTop(worldBounds.getTop());
 //        if(getBottom() )
     }
 
@@ -106,9 +103,9 @@ public class Star extends GameMatter implements Movable {
     public void setVelocity() {
         float vx = Indeterminacy.nextFloat(-0.5f, 0.5f);
         float vy = Indeterminacy.nextFloat(-0.5f, -0.1f);
-//        vx = Indeterminacy.nextFloat(-1f, -1f);
-        vy = Indeterminacy.nextFloat(-0.3f, -0.1f);
-        velocity.set(0.00f, -0f);
+        vx = Indeterminacy.nextFloat(-0.05f, 0.05f);
+        vy = Indeterminacy.nextFloat(-55.5f, -51.1f);
+        velocity.set(vx, vy);
 //        velocity.set(Indeterminacy.nextFloat(-0.5f, 0.5f), Indeterminacy.nextFloat(-0.5f, -0.1f));
     }
 }

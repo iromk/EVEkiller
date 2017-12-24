@@ -4,10 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-import pro.xite.game.evekiller.abstracts.Rect;
 import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
 
 /**
@@ -20,7 +18,7 @@ public class FFAGalaxy extends GameMatter {
     TextureRegion crop;
     private float deltaScaleFactor = 0.2f;
 
-    public FFAGalaxy(SpriteBatch spriteBatch, Rectangular worldBounds) {
+    public FFAGalaxy(SpriteBatch spriteBatch) {
         super("");
 
         Texture texture = new Texture(ffaGalaxyImageFilename);
@@ -31,8 +29,6 @@ public class FFAGalaxy extends GameMatter {
 
     public void draw() {
 
-//        Vector2 center = new Vector2();
-//        getCenter(center);
         universe.draw(
                 this.texture, // текущий регион
                 getLeft(), getBottom(), //точка отрисовки
@@ -45,24 +41,12 @@ public class FFAGalaxy extends GameMatter {
 
     @Override
     public void resize(Rectangular worldBounds) {
-        System.out.println("wb: " + worldBounds);
         float height = worldBounds.getHeight();
         setHeight(height);
-        float aspect = texture.getRegionHeight() / (float) texture.getRegionWidth();
+        float aspect = texture.getRegionWidth() / (float) texture.getRegionHeight();
         setWidth(height * aspect);
-//        setCenter(worldBounds.getCenterX(), worldBounds.getCenterY());
-        pos.set(worldBounds.pos);
-        System.out.println(
-                " " + aspect +
-                "\n" + getLeft() +
-                " " + getBottom() +
-                "\n" + getCenterX() +
-                " " + getCenterY() +
-                "\n" + getWidth() +
-                " " + getHeight() +
-                "\n" + worldBounds.getCenterX()
-                + " " + worldBounds.getCenterY()
-        );
+        getCenter().set(worldBounds.getCenter());
+        fix();
     }
 
     private TextureRegion getRandomTextureRegion(Texture texture) {
@@ -77,10 +61,8 @@ public class FFAGalaxy extends GameMatter {
     }
 
     public void moveTo(Vector2 delta) {
-        Vector2 p = new Vector2();
-//        getCenter(p);
-        p.sub(delta.scl(deltaScaleFactor));
-//        setPosition(p);
+        getCenter().sub(delta.scl(deltaScaleFactor));
+        fix();
     }
 
 }

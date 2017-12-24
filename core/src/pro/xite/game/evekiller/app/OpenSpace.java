@@ -2,18 +2,12 @@ package pro.xite.game.evekiller.app;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.input.GestureDetector;
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.graphics.GL20;
 
-
-import pro.xite.game.evekiller.abstracts.Rect;
 import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
 import pro.xite.game.evekiller.darkmatter.Indeterminacy;
-import pro.xite.game.evekiller.darkmatter.MassEffect;
-import pro.xite.game.evekiller.darkmatter.oldUniverse;
 import pro.xite.game.evekiller.matter.FFAGalaxy;
-import pro.xite.game.evekiller.matter.MillenniumFalcon;
+import pro.xite.game.evekiller.matter.Falcon;
 import pro.xite.game.evekiller.matter.Star;
 
 /**
@@ -26,18 +20,20 @@ public class OpenSpace extends Base2DScreen {
 //    Game game;
 
     FFAGalaxy ffaGalaxy;
-    MillenniumFalcon player;
     Star[] stars;
+    Falcon playa;
     static final int STARS = 102;
 
     public OpenSpace(Game game) {
         super(game);
-        ffaGalaxy = new FFAGalaxy(batch, worldBounds);
-//        stars = new Star[STARS];
-//        player = new MillenniumFalcon(batch, worldBounds);
-//        for (int i = 0; i < STARS; i++) {
-//            stars[i] = new Star(batch, worldBounds);
-//        }
+        ffaGalaxy = new FFAGalaxy(batch);
+        playa = new Falcon(batch, worldBounds);
+        stars = new Star[STARS];
+
+        for (int i = 0; i < STARS; i++) {
+            Indeterminacy.nextFloat(-1f, 1f);
+            stars[i] = new Star(batch, worldBounds);
+        }
 //        this.game = game;
 //        batch = new SpriteBatch();
 //        Gdx.input.setInputProcessor(new GestureDetector(new MassEffect(universeBatch)));
@@ -46,15 +42,17 @@ public class OpenSpace extends Base2DScreen {
     @Override
     public void render(float delta) {
         super.render(delta);
+        Gdx.gl.glClearColor(0, 0, 0, 0);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
 //		batch.render();
         if(ffaGalaxy != null)
             ffaGalaxy.draw();
-//        for (int i = 0; i < STARS; i++) {
-//            stars[i].move(delta);
-//            stars[i].draw();
-//        }
-//        player.draw();
+        for (int i = 0; i < STARS; i++) {
+            stars[i].move(delta);
+            stars[i].draw();
+        }
+        playa.draw();
         batch.end();
 //        game.setScreen(new MenuScreen(game));
     }
@@ -63,6 +61,8 @@ public class OpenSpace extends Base2DScreen {
     protected void resize(Rectangular worldBounds) {
         if(ffaGalaxy != null)
             ffaGalaxy.resize(worldBounds);
+        if(playa != null) playa.resize(worldBounds);
+
 //        buttonExit.resize(worldBounds);
 //        buttonNewGame.resize(worldBounds);
         if(stars != null)
@@ -70,8 +70,6 @@ public class OpenSpace extends Base2DScreen {
             if(stars[i] != null)
                 stars[i].resize(worldBounds);
         }
-        if(player != null)
-        player.resize(worldBounds);
     }
 
     @Override
@@ -82,9 +80,6 @@ public class OpenSpace extends Base2DScreen {
 
     @Override
     public boolean keyDown(int keycode) {
-        System.out.println("key");
-
-        player.moveLeft();
         return false;
     }
 

@@ -8,9 +8,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Rectangle;
-import pro.xite.game.evekiller.abstracts.*;
 import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
+import pro.xite.game.evekiller.abstracts.MatrixUtils;
 
 /**
  * Created by Roman Syrchin on 12/12/17.
@@ -27,21 +26,22 @@ abstract class Base2DScreen implements Screen, InputProcessor {
     protected Matrix3 screenToWorld;
 
     Vector2 touch = new Vector2();
-    Rectangle a;
+
     protected SpriteBatch batch;
+
 
     public Base2DScreen(Game game) {
         this.game = game;
         this.screenBounds = new Rectangular();
         this.worldBounds = new Rectangular();
-        this.glBounds = new Rectangular(-1f, -1f,2f,2f);
+        this.glBounds = new Rectangular(2f, 2f);
         this.worldToGl = new Matrix4();
         this.screenToWorld = new Matrix3();
         if (this.batch != null) {
             throw new RuntimeException("Повторная установка screen без dispose");
         }
         this.batch = new SpriteBatch();
-//        resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
     @Override
@@ -57,18 +57,13 @@ abstract class Base2DScreen implements Screen, InputProcessor {
     @Override
     public void resize(int width, int height) {
         screenBounds.setSize(width, height);
-        screenBounds.pos.x = 0;
-        screenBounds.pos.y = 0;
-//        System.out.println("scrn bnds\n" + screenBounds);
-//        System.out.println(batch.getProjectionMatrix());
-//        System.out.println(batch.getTransformMatrix());
+        screenBounds.setLeft(0);
+        screenBounds.setBottom(0);
+
         float aspect = width / (float) height;
         worldBounds.setHeight(600f);
         worldBounds.setWidth(600f * aspect);
-//        worldBounds.set(-600f / 2, -(600f * aspect) / 2, 600f, 600f * aspect );
-//        worldBounds.setWidth(600f * aspect);
         MatrixUtils.calcTransitionMatrix(worldToGl, worldBounds, glBounds);
-//        System.out.println(worldToGl);
         batch.setProjectionMatrix(worldToGl);
 
         MatrixUtils.calcTransitionMatrix(screenToWorld, screenBounds, worldBounds);

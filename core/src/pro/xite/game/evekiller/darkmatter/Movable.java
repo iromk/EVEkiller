@@ -10,7 +10,6 @@ import pro.xite.game.evekiller.matter.SelfDrawable;
 
 public interface Movable {
 
-    Vector2 velocity = new Vector2();
 
     public void move(float delta);
 
