@@ -57,14 +57,16 @@ abstract class Base2DScreen implements Screen, InputProcessor {
     @Override
     public void resize(int width, int height) {
         screenBounds.setSize(width, height);
-        screenBounds.x = 0;
-        screenBounds.y = 0;
-        System.out.println("scrn bnds\n" + screenBounds);
-        System.out.println(batch.getProjectionMatrix());
-        System.out.println(batch.getTransformMatrix());
+        screenBounds.pos.x = 0;
+        screenBounds.pos.y = 0;
+//        System.out.println("scrn bnds\n" + screenBounds);
+//        System.out.println(batch.getProjectionMatrix());
+//        System.out.println(batch.getTransformMatrix());
         float aspect = width / (float) height;
-        worldBounds.setHeight(300f);
-        worldBounds.setWidth(300f * aspect);
+        worldBounds.setHeight(600f);
+        worldBounds.setWidth(600f * aspect);
+//        worldBounds.set(-600f / 2, -(600f * aspect) / 2, 600f, 600f * aspect );
+//        worldBounds.setWidth(600f * aspect);
         MatrixUtils.calcTransitionMatrix(worldToGl, worldBounds, glBounds);
 //        System.out.println(worldToGl);
         batch.setProjectionMatrix(worldToGl);
@@ -73,7 +75,7 @@ abstract class Base2DScreen implements Screen, InputProcessor {
         resize(worldBounds);
     }
 
-    protected void resize(Rectangle worldBounds) {
+    protected void resize(Rectangular worldBounds) {
 
     }
 

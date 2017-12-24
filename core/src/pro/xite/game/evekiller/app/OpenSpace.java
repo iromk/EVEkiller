@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 
 import pro.xite.game.evekiller.abstracts.Rect;
+import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
 import pro.xite.game.evekiller.darkmatter.Indeterminacy;
 import pro.xite.game.evekiller.darkmatter.MassEffect;
 import pro.xite.game.evekiller.darkmatter.oldUniverse;
@@ -31,13 +32,12 @@ public class OpenSpace extends Base2DScreen {
 
     public OpenSpace(Game game) {
         super(game);
-        ffaGalaxy = new FFAGalaxy(batch);
-        stars = new Star[STARS];
-        player = new MillenniumFalcon(batch, worldBounds);
-        for (int i = 0; i < STARS; i++) {
-            Indeterminacy.nextFloat(-1f, 1f);
-            stars[i] = new Star(batch, worldBounds);
-        }
+        ffaGalaxy = new FFAGalaxy(batch, worldBounds);
+//        stars = new Star[STARS];
+//        player = new MillenniumFalcon(batch, worldBounds);
+//        for (int i = 0; i < STARS; i++) {
+//            stars[i] = new Star(batch, worldBounds);
+//        }
 //        this.game = game;
 //        batch = new SpriteBatch();
 //        Gdx.input.setInputProcessor(new GestureDetector(new MassEffect(universeBatch)));
@@ -50,17 +50,17 @@ public class OpenSpace extends Base2DScreen {
 //		batch.render();
         if(ffaGalaxy != null)
             ffaGalaxy.draw();
-        for (int i = 0; i < STARS; i++) {
-            stars[i].move(delta);
-            stars[i].draw();
-        }
-        player.draw();
+//        for (int i = 0; i < STARS; i++) {
+//            stars[i].move(delta);
+//            stars[i].draw();
+//        }
+//        player.draw();
         batch.end();
 //        game.setScreen(new MenuScreen(game));
     }
 
     @Override
-    protected void resize(Rectangle worldBounds) {
+    protected void resize(Rectangular worldBounds) {
         if(ffaGalaxy != null)
             ffaGalaxy.resize(worldBounds);
 //        buttonExit.resize(worldBounds);

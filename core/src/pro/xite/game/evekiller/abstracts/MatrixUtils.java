@@ -23,14 +23,14 @@ public class MatrixUtils {
      * @param src исходный квадрат
      * @param dst итоговый квадрат
      */
-    public static void calcTransitionMatrix(Matrix4 mat, Rectangle src, Rectangle dst) {
+    public static void calcTransitionMatrix(Matrix4 mat, Rectangular src, Rectangular dst) {
         float scaleX = dst.getWidth() / src.getWidth();
         float scaleY = dst.getHeight() / src.getHeight();
         mat.idt();
-//           mat.translate(dst.x, dst.y, 0f);
+           mat.translate(dst.pos.x, dst.pos.y, 0f);
            mat.scale(scaleX, scaleY, 1f);
-//           mat.translate(-src.x, -src.y, 0f);
-//        System.out.println(mat);
+           mat.translate(-src.pos.x, -src.pos.y, 0f);
+        System.out.println(mat);
     }
 
     /**
@@ -39,7 +39,7 @@ public class MatrixUtils {
      * @param src исходный квадрат
      * @param dst итоговый квадрат
      */
-    public static void calcTransitionMatrix(Matrix3 mat, Rectangle src, Rectangle dst) {
+    public static void calcTransitionMatrix(Matrix3 mat, Rectangular src, Rectangular dst) {
         float scaleX = dst.getWidth() / src.getWidth();
         float scaleY = dst.getHeight() / src.getHeight();
         mat.idt()

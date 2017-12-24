@@ -37,7 +37,7 @@ abstract public class GameMatter extends Rectangular implements SelfDrawable, Di
 //        position.set(x, y);
 //    }
 
-    public void resize(Rectangle worldBounds) {
+    public void resize(Rectangular worldBounds) {
 
     }
 

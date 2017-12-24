@@ -27,7 +27,7 @@ public class MillenniumFalcon extends GameMatter implements Movable {
         setWidth(35f);
         float aspect = texture.getRegionWidth() / (float) texture.getRegionHeight();
         setHeight(35f / aspect);
-        setCenter(0+worldBounds.width/2, 0+worldBounds.height/2);
+//        setCenter(worldBounds.getCenterX(), worldBounds.getCenterY());
 
         universe = batch;
         setVelocity();
@@ -38,13 +38,13 @@ public class MillenniumFalcon extends GameMatter implements Movable {
     public void draw() {
 //        System.out.println(universe.getProjectionMatrix());
 //        System.out.println(universe.setProjectionMatrix(););
-        Vector2 center = new Vector2();
-        getCenter(center);
+//        Vector2 center = new Vector2();
+//        getCenter(center);
 
         universe.draw(
                 texture, // текущий регион
-                getX(), getY(), //точка отрисовки
-                center.x, center.y, // точка вращения
+                getLeft(), getBottom(), //точка отрисовки
+                getCenterX(), getCenterY(), // точка вращения
                 getWidth(), getHeight(), // ширина и высота
                 scale, scale, // масштаб по x и y
                 angle // угол вращения
@@ -54,10 +54,10 @@ public class MillenniumFalcon extends GameMatter implements Movable {
     public void moveLeft() {
 //        System.out.println(velocity);
         Vector2 position = new Vector2();
-        getCenter(position);
+//        getCenter(position);
         System.out.println(position);
         position.add(velocity);
-        setCenter(position);
+//        setCenter(position);
         System.out.println(position);
     }
 

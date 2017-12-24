@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
+import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
 import pro.xite.game.evekiller.matter.DeathStar;
 import pro.xite.game.evekiller.matter.FFAGalaxy;
 import pro.xite.game.evekiller.matter.SelfDrawable;
@@ -25,7 +26,7 @@ public class oldUniverse extends SpriteBatch {
 
     public oldUniverse() {
 //        deathStar = new DeathStar(this);
-        ffaGalaxy = new FFAGalaxy(this);
+        ffaGalaxy = new FFAGalaxy(this, new Rectangular());
         stars = new Star[11];
 //        for (int i = 0; i < stars.length; i++)
 //            stars[i] = new Star();

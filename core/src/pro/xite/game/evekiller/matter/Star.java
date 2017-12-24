@@ -30,7 +30,7 @@ public class Star extends GameMatter implements Movable {
         this.worldBounds = worldBounds;
 
 //        setWidthProportion(width);
-        float stellarMagnitude = Indeterminacy.nextFloat(0.005f, 0.01f);
+        float stellarMagnitude = Indeterminacy.nextFloat(1f, 5f);
         setWidth(stellarMagnitude);
         float aspect = texture.getRegionWidth() / (float) texture.getRegionHeight();
         setHeight(stellarMagnitude / aspect);
@@ -45,13 +45,18 @@ public class Star extends GameMatter implements Movable {
 //    }
 
     @Override
-    public void resize(Rectangle worldBounds) {
+    public void resize(Rectangular worldBounds) {
 //        float height = worldBounds.getHeight();
 //        setHeight(height);
 //        float aspect = texture.getRegionWidth() / (float) texture.getRegionHeight();
 //        setWidth(height * aspect);
-        super.setPosition(Indeterminacy.nextFloat(worldBounds.getX(), worldBounds.getWidth()),
-                          Indeterminacy.nextFloat(worldBounds.getY(), worldBounds.getHeight()));
+//        System.out.println(worldBounds);
+     /*   super.setCenter(Indeterminacy.nextFloat(worldBounds.getX(), worldBounds.getRight()),
+                          Indeterminacy.nextFloat(worldBounds.getY(), worldBounds.getBottom()));
+         System.out.println(worldBounds + " " + getCenterX() + ":" + getCenterY()
+                        + " " + getX() + ":" + getY()
+                        + " " + getWidth() + ":" + getHeight());*/
+//        System.out.println();
 //        float height = worldBounds.getHeight();
 //        setHeight(height);
 //        float aspect = texture.getRegionWidth() / (float) texture.getRegionHeight();
@@ -63,30 +68,11 @@ public class Star extends GameMatter implements Movable {
 
     @Override
     public void draw() {
-//        System.out.println(getLeft()
-//                + " " +
-//                getBottom()
-//                + " " +
-//                halfWidth
-//                + " " +
-//                halfHeight
-//                + " " +
-//                getWidth()
-//                + " " +
-//                getHeight()
-//                + " " +
-//                Gdx.graphics.getWidth()
-//                + " " +
-//                Gdx.graphics.getHeight()
-//        );
-
-        Vector2 center = new Vector2();
-        getCenter(center);
 
         universe.draw(
                 texture, // текущий регион
-                getX(), getY(), //точка отрисовки
-                center.x, center.y, // точка вращения
+                getLeft(), getBottom(), //точка отрисовки
+                getCenterX(), getCenterY(), // точка вращения
                 getWidth(), getHeight(), // ширина и высота
                 scale, scale, // масштаб по x и y
                 angle // угол вращения
@@ -95,20 +81,24 @@ public class Star extends GameMatter implements Movable {
 
     @Override
     public void move(float deltaTime) {
-        Vector2 position = new Vector2();
-        getCenter(position);
+        /*
+        System.out.println("vel " + velocity);
+        Vector2 position = getCenter().cpy();
 //        position.add(velocity);
-        position.mulAdd(velocity, deltaTime);
+        System.out.println(position);
+        position.add(velocity);
+//        position.mulAdd(velocity, deltaTime);
+        System.out.println(position);
         setCenter(position);
 
-        stayInBounds();
+        stayInBounds();*/
     }
 
     private void stayInBounds() {
 //        if(getRight() < worldBounds.getLeft()) setLeft(worldBounds.getRight());
 //        if(getLeft() > worldBounds.getRight()) setRight(worldBounds.getLeft());
 //        if(getTop() < worldBounds.getBottom()) setTop(worldBounds.getTop());
-        if(!worldBounds.contains(this)) this.y = worldBounds.getHeight();
+//        if(!worldBounds.contains(this)) this.y = worldBounds.getHeight();
 //        if(getBottom() )
     }
 
@@ -116,9 +106,9 @@ public class Star extends GameMatter implements Movable {
     public void setVelocity() {
         float vx = Indeterminacy.nextFloat(-0.5f, 0.5f);
         float vy = Indeterminacy.nextFloat(-0.5f, -0.1f);
-        vx = Indeterminacy.nextFloat(-0.05f, 0.05f);
-        vy = Indeterminacy.nextFloat(-0.5f, -0.1f);
-        velocity.set(vx, vy);
+//        vx = Indeterminacy.nextFloat(-1f, -1f);
+        vy = Indeterminacy.nextFloat(-0.3f, -0.1f);
+        velocity.set(0.00f, -0f);
 //        velocity.set(Indeterminacy.nextFloat(-0.5f, 0.5f), Indeterminacy.nextFloat(-0.5f, -0.1f));
     }
 }
