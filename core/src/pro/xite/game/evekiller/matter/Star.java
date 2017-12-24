@@ -92,11 +92,11 @@ public class Star extends GameMatter implements Movable {
         stayInBounds();
     }
 
-    private void stayInBounds() {/*
-        if(getRight() < worldBounds.getLeft()) setLeft(worldBounds.getRight());
-        if(getLeft() > worldBounds.getRight()) setRight(worldBounds.getLeft());
+    private void stayInBounds() {
+//        if(getRight() < worldBounds.getLeft()) setLeft(worldBounds.getRight());
+//        if(getLeft() > worldBounds.getRight()) setRight(worldBounds.getLeft());
         if(getTop() < worldBounds.getBottom()) setTop(worldBounds.getTop());
-//        if(getBottom() )*/
+//        if(getBottom() )
     }
 
     @Override

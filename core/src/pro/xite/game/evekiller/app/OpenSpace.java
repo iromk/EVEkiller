@@ -1,6 +1,8 @@
 package pro.xite.game.evekiller.app;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 
 import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
 import pro.xite.game.evekiller.darkmatter.Indeterminacy;
@@ -40,6 +42,8 @@ public class OpenSpace extends Base2DScreen {
     @Override
     public void render(float delta) {
         super.render(delta);
+        Gdx.gl.glClearColor(0, 0, 0, 0);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
 //		batch.render();
         if(ffaGalaxy != null)

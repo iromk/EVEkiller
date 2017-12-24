@@ -67,7 +67,7 @@ public class Rectangular extends Rectangle implements Projectable {
 
     @Override
     public void setTop(float top) {
-        height = top - y;
+        y = top;
     }
 
     @Override
