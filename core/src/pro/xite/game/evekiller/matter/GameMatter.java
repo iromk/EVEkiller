@@ -1,19 +1,16 @@
 package pro.xite.game.evekiller.matter;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
 
-import pro.xite.game.evekiller.abstracts.Rect;
-import pro.xite.game.evekiller.darkmatter.oldUniverse;
+import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
 
 /**
  * Created by Roman Syrchin on 12/8/17.
  */
 
-abstract public class GameMatter extends Rect implements SelfDrawable, Disposable {
+abstract public class GameMatter extends Rectangular implements SelfDrawable, Disposable {
 
     TextureRegion texture;
     SpriteBatch universe;
@@ -31,11 +28,11 @@ abstract public class GameMatter extends Rect implements SelfDrawable, Disposabl
 //        System.out.println("class >" + getClass().getName().split(".") );
     }
 
-    public void setPosition(float x, float y) {
-        position.set(x, y);
-    }
+//    public void setPosition(float x, float y) {
+//        position.set(x, y);
+//    }
 
-    public void resize(Rect worldBounds) {
+    public void resize(Rectangular worldBounds) {
 
     }
 

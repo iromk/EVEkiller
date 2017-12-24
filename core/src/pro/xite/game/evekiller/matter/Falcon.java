@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
-import pro.xite.game.evekiller.abstracts.Rect;
+import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
 import pro.xite.game.evekiller.darkmatter.Movable;
 
 import pro.xite.game.evekiller.app.Regions;
@@ -19,11 +19,11 @@ import pro.xite.game.evekiller.app.Regions;
 
 public class Falcon extends GameMatter implements Movable {
 
-    private Rect worldBounds;
+    private Rectangular worldBounds;
     Vector2 velocity = new Vector2();
 
 
-    public Falcon(SpriteBatch batch, Rect worldBounds) {
+    public Falcon(SpriteBatch batch, Rectangular worldBounds) {
         super("main_ship");
         TextureRegion[] regions = Regions.split(texture, 1, 2,2);
         texture = regions[0];
@@ -33,7 +33,8 @@ public class Falcon extends GameMatter implements Movable {
         float aspect = texture.getRegionWidth() / (float) texture.getRegionHeight();
         setHeight(35f / aspect);
 //        setCenter(0+worldBounds.width/2, 0+worldBounds.height/2);
-        position.set(worldBounds.position);
+        getCenter().set(worldBounds.getCenter());
+        fix();
 
         universe = batch;
         setVelocity();
@@ -49,11 +50,17 @@ public class Falcon extends GameMatter implements Movable {
         universe.draw(
                 texture, // текущий регион
                 getLeft(), getBottom(), //точка отрисовки
-                halfWidth, halfHeight, // точка вращения
+                getCenterX(), getCenterY(), // точка вращения
                 getWidth(), getHeight(), // ширина и высота
                 scale, scale, // масштаб по x и y
                 angle // угол вращения
         );
+    }
+
+    @Override
+    public void resize(Rectangular worldBounds) {
+        getCenter().set(worldBounds.getCenter());
+        fix();
     }
 
     public void moveLeft() {
@@ -61,7 +68,8 @@ public class Falcon extends GameMatter implements Movable {
 //        Vector2 position = new Vector2();
 //        getCenter(position);
 //        System.out.println(position);
-        position.add(velocity);
+        getCenter().add(velocity);
+        fix();
 //        setCenter(position);
 //        System.out.println(position);
     }

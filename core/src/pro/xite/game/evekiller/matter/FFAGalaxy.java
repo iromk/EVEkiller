@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
-import pro.xite.game.evekiller.abstracts.Rect;
+import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
 
 /**
  * Created by Roman Syrchin on 12/8/17.
@@ -32,7 +32,7 @@ public class FFAGalaxy extends GameMatter {
         universe.draw(
                 this.texture, // текущий регион
                 getLeft(), getBottom(), //точка отрисовки
-                halfWidth, halfHeight, // точка вращения
+                getCenterX(), getCenterY(), // точка вращения
                 getWidth(), getHeight(), // ширина и высота
                 scale, scale, // масштаб по x и y
                 angle // угол вращения
@@ -40,12 +40,13 @@ public class FFAGalaxy extends GameMatter {
     }
 
     @Override
-    public void resize(Rect worldBounds) {
+    public void resize(Rectangular worldBounds) {
         float height = worldBounds.getHeight();
         setHeight(height);
         float aspect = texture.getRegionWidth() / (float) texture.getRegionHeight();
         setWidth(height * aspect);
-        this.position.set(worldBounds.position);
+        getCenter().set(worldBounds.getCenter());
+        fix();
     }
 
     private TextureRegion getRandomTextureRegion(Texture texture) {
@@ -60,7 +61,8 @@ public class FFAGalaxy extends GameMatter {
     }
 
     public void moveTo(Vector2 delta) {
-        position.sub(delta.scl(deltaScaleFactor));
+        getCenter().sub(delta.scl(deltaScaleFactor));
+        fix();
     }
 
 }

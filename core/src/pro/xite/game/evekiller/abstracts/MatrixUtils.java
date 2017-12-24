@@ -3,6 +3,7 @@ package pro.xite.game.evekiller.abstracts;
 
 import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Matrix4;
+import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
 
 /**
  * Утилита для работы с матрицами
@@ -18,10 +19,11 @@ public class MatrixUtils {
      * @param src исходный квадрат
      * @param dst итоговый квадрат
      */
-    public static void calcTransitionMatrix(Matrix4 mat, Rect src, Rect dst) {
+    public static void calcTransitionMatrix(Matrix4 mat, Rectangular src, Rectangular dst) {
         float scaleX = dst.getWidth() / src.getWidth();
         float scaleY = dst.getHeight() / src.getHeight();
-        mat.idt().translate(dst.position.x, dst.position.y, 0f).scale(scaleX, scaleY, 1f).translate(-src.position.x, -src.position.y, 0f);
+        mat.idt().translate(dst.getCenterX(), dst.getCenterY(), 0f).scale(scaleX, scaleY, 1f)
+                .translate(-src.getCenterX(), -src.getCenterY(), 0f);
     }
 
     /**
@@ -30,9 +32,10 @@ public class MatrixUtils {
      * @param src исходный квадрат
      * @param dst итоговый квадрат
      */
-    public static void calcTransitionMatrix(Matrix3 mat, Rect src, Rect dst) {
+    public static void calcTransitionMatrix(Matrix3 mat, Rectangular src, Rectangular dst) {
         float scaleX = dst.getWidth() / src.getWidth();
         float scaleY = dst.getHeight() / src.getHeight();
-        mat.idt().translate(dst.position.x, dst.position.y).scale(scaleX, scaleY).translate(-src.position.x, -src.position.y);
+        mat.idt().translate(dst.getCenterX(), dst.getCenterY()).scale(scaleX, scaleY)
+                .translate(-src.getCenterX(), -src.getCenterY());
     }
 }

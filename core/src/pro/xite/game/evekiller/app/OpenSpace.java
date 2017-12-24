@@ -1,14 +1,9 @@
 package pro.xite.game.evekiller.app;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.input.GestureDetector;
 
-import pro.xite.game.evekiller.abstracts.Rect;
+import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
 import pro.xite.game.evekiller.darkmatter.Indeterminacy;
-import pro.xite.game.evekiller.darkmatter.MassEffect;
-import pro.xite.game.evekiller.darkmatter.oldUniverse;
 import pro.xite.game.evekiller.matter.FFAGalaxy;
 import pro.xite.game.evekiller.matter.Falcon;
 import pro.xite.game.evekiller.matter.Star;
@@ -59,7 +54,7 @@ public class OpenSpace extends Base2DScreen {
     }
 
     @Override
-    protected void resize(Rect worldBounds) {
+    protected void resize(Rectangular worldBounds) {
         if(ffaGalaxy != null)
             ffaGalaxy.resize(worldBounds);
         if(playa != null) playa.resize(worldBounds);

@@ -8,7 +8,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
-import pro.xite.game.evekiller.abstracts.*;
+import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
+import pro.xite.game.evekiller.abstracts.MatrixUtils;
 
 /**
  * Created by Roman Syrchin on 12/12/17.
@@ -17,9 +18,9 @@ import pro.xite.game.evekiller.abstracts.*;
 abstract class Base2DScreen implements Screen, InputProcessor {
 
     protected Game game;
-    private Rect screenBounds; // границы области рисования в пикселях
-    protected Rect worldBounds; // границы проекции мировых координат
-    private Rect glBounds; // дефолтные границы проекции мир - gl
+    private Rectangular screenBounds; // границы области рисования в пикселях
+    protected Rectangular worldBounds; // границы проекции мировых координат
+    private Rectangular glBounds; // дефолтные границы проекции мир - gl
 
     protected Matrix4 worldToGl;
     protected Matrix3 screenToWorld;
@@ -31,9 +32,9 @@ abstract class Base2DScreen implements Screen, InputProcessor {
 
     public Base2DScreen(Game game) {
         this.game = game;
-        this.screenBounds = new Rect();
-        this.worldBounds = new Rect();
-        this.glBounds = new Rect(0,0,1f,1f);
+        this.screenBounds = new Rectangular();
+        this.worldBounds = new Rectangular();
+        this.glBounds = new Rectangular(2f, 2f);
         this.worldToGl = new Matrix4();
         this.screenToWorld = new Matrix3();
         if (this.batch != null) {
@@ -69,7 +70,7 @@ abstract class Base2DScreen implements Screen, InputProcessor {
         resize(worldBounds);
     }
 
-    protected void resize(Rect worldBounds) {
+    protected void resize(Rectangular worldBounds) {
 
     }
 

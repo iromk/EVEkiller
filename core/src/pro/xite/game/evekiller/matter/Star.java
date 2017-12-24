@@ -1,12 +1,9 @@
 package pro.xite.game.evekiller.matter;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
-import pro.xite.game.evekiller.abstracts.Rect;
+import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
 import pro.xite.game.evekiller.darkmatter.Indeterminacy;
 import pro.xite.game.evekiller.darkmatter.Movable;
 
@@ -19,10 +16,10 @@ public class Star extends GameMatter implements Movable {
     Vector2 velocity = new Vector2();
 
 
-    private Rect worldBounds;
+    private Rectangular worldBounds;
 //    TextureRegion textureRegion;
 
-    public Star(SpriteBatch batch, Rect worldBounds) {
+    public Star(SpriteBatch batch, Rectangular worldBounds) {
         super("star");
 //        texture = new TextureRegion(new Texture("deathstar.png"));
         this.worldBounds = worldBounds;
@@ -43,7 +40,7 @@ public class Star extends GameMatter implements Movable {
 //    }
 
     @Override
-    public void resize(Rect worldBounds) {
+    public void resize(Rectangular worldBounds) {
 //        float height = worldBounds.getHeight();
 //        setHeight(height);
 //        float aspect = texture.getRegionWidth() / (float) texture.getRegionHeight();
@@ -81,7 +78,7 @@ public class Star extends GameMatter implements Movable {
         universe.draw(
                 texture, // текущий регион
                 getLeft(), getBottom(), //точка отрисовки
-                halfWidth, halfHeight, // точка вращения
+                getCenterX(), getCenterY(), // точка вращения
                 getWidth(), getHeight(), // ширина и высота
                 scale, scale, // масштаб по x и y
                 angle // угол вращения
@@ -90,15 +87,16 @@ public class Star extends GameMatter implements Movable {
 
     @Override
     public void move(float deltaTime) {
-        position.mulAdd(velocity, deltaTime);
+        getCenter().mulAdd(velocity, deltaTime);
+        fix();
         stayInBounds();
     }
 
-    private void stayInBounds() {
+    private void stayInBounds() {/*
         if(getRight() < worldBounds.getLeft()) setLeft(worldBounds.getRight());
         if(getLeft() > worldBounds.getRight()) setRight(worldBounds.getLeft());
         if(getTop() < worldBounds.getBottom()) setTop(worldBounds.getTop());
-//        if(getBottom() )
+//        if(getBottom() )*/
     }
 
     @Override
