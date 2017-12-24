@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 
 import pro.xite.game.evekiller.abstracts.Rect;
 import pro.xite.game.evekiller.darkmatter.Indeterminacy;
@@ -15,6 +16,8 @@ import pro.xite.game.evekiller.darkmatter.Movable;
 
 public class Star extends GameMatter implements Movable {
 
+    Vector2 velocity = new Vector2();
+
 
     private Rect worldBounds;
 //    TextureRegion textureRegion;
@@ -25,7 +28,7 @@ public class Star extends GameMatter implements Movable {
         this.worldBounds = worldBounds;
 
 //        setWidthProportion(width);
-        float stellarMagnitude = Indeterminacy.nextFloat(0.005f, 0.01f);
+        float stellarMagnitude = Indeterminacy.nextFloat(5.005f, 10.01f);
         setWidth(stellarMagnitude);
         float aspect = texture.getRegionWidth() / (float) texture.getRegionHeight();
         setHeight(stellarMagnitude / aspect);
@@ -103,7 +106,7 @@ public class Star extends GameMatter implements Movable {
         float vx = Indeterminacy.nextFloat(-0.5f, 0.5f);
         float vy = Indeterminacy.nextFloat(-0.5f, -0.1f);
         vx = Indeterminacy.nextFloat(-0.05f, 0.05f);
-        vy = Indeterminacy.nextFloat(-0.5f, -0.1f);
+        vy = Indeterminacy.nextFloat(-55.5f, -51.1f);
         velocity.set(vx, vy);
 //        velocity.set(Indeterminacy.nextFloat(-0.5f, 0.5f), Indeterminacy.nextFloat(-0.5f, -0.1f));
     }

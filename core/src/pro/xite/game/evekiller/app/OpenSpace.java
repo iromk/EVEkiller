@@ -10,6 +10,7 @@ import pro.xite.game.evekiller.darkmatter.Indeterminacy;
 import pro.xite.game.evekiller.darkmatter.MassEffect;
 import pro.xite.game.evekiller.darkmatter.oldUniverse;
 import pro.xite.game.evekiller.matter.FFAGalaxy;
+import pro.xite.game.evekiller.matter.Falcon;
 import pro.xite.game.evekiller.matter.Star;
 
 /**
@@ -23,12 +24,15 @@ public class OpenSpace extends Base2DScreen {
 
     FFAGalaxy ffaGalaxy;
     Star[] stars;
+    Falcon playa;
     static final int STARS = 102;
 
     public OpenSpace(Game game) {
         super(game);
         ffaGalaxy = new FFAGalaxy(batch);
+        playa = new Falcon(batch, worldBounds);
         stars = new Star[STARS];
+
         for (int i = 0; i < STARS; i++) {
             Indeterminacy.nextFloat(-1f, 1f);
             stars[i] = new Star(batch, worldBounds);
@@ -49,6 +53,7 @@ public class OpenSpace extends Base2DScreen {
             stars[i].move(delta);
             stars[i].draw();
         }
+        playa.draw();
         batch.end();
 //        game.setScreen(new MenuScreen(game));
     }
@@ -57,6 +62,8 @@ public class OpenSpace extends Base2DScreen {
     protected void resize(Rect worldBounds) {
         if(ffaGalaxy != null)
             ffaGalaxy.resize(worldBounds);
+        if(playa != null) playa.resize(worldBounds);
+
 //        buttonExit.resize(worldBounds);
 //        buttonNewGame.resize(worldBounds);
         if(stars != null)
