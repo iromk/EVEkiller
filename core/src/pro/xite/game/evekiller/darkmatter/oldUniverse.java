@@ -26,7 +26,7 @@ public class oldUniverse extends SpriteBatch {
 
     public oldUniverse() {
 //        deathStar = new DeathStar(this);
-        ffaGalaxy = new FFAGalaxy(this, new Rectangular());
+        ffaGalaxy = new FFAGalaxy(this);
         stars = new Star[11];
 //        for (int i = 0; i < stars.length; i++)
 //            stars[i] = new Star();

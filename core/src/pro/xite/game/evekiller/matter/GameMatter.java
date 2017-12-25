@@ -28,6 +28,19 @@ abstract public class GameMatter extends Rectangular implements SelfDrawable, Di
 //        System.out.println("class >" + getClass().getName().split(".") );
     }
 
+
+    public void draw() {
+
+        universe.draw(
+                this.texture, // текущий регион
+                getLeft(), getBottom(), //точка отрисовки
+                getCenterX(), getCenterY(), // точка вращения
+                getWidth(), getHeight(), // ширина и высота
+                scale, scale, // масштаб по x и y
+                angle // угол вращения
+        );
+    }
+
 //    public void setPosition(float x, float y) {
 //        position.set(x, y);
 //    }

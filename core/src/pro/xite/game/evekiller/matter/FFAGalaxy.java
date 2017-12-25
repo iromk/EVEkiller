@@ -27,18 +27,6 @@ public class FFAGalaxy extends GameMatter {
         this.texture = getRandomTextureRegion(texture);
     }
 
-    public void draw() {
-
-        universe.draw(
-                this.texture, // текущий регион
-                getLeft(), getBottom(), //точка отрисовки
-                getCenterX(), getCenterY(), // точка вращения
-                getWidth(), getHeight(), // ширина и высота
-                scale, scale, // масштаб по x и y
-                angle // угол вращения
-        );
-    }
-
     @Override
     public void resize(Rectangular worldBounds) {
         float height = worldBounds.getHeight();
