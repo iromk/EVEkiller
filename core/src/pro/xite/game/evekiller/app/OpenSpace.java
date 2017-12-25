@@ -42,6 +42,7 @@ public class OpenSpace extends Base2DScreen {
     @Override
     public void render(float delta) {
         update(delta);
+        deleteAllDestroyed();
         super.render(delta);
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -59,7 +60,7 @@ public class OpenSpace extends Base2DScreen {
     }
 
     public void update(float delta) {
-        playa.update();
+        playa.update(delta);
     }
 
     @Override
@@ -77,6 +78,15 @@ public class OpenSpace extends Base2DScreen {
         }
     }
 
+    /**
+     * Удаление помеченных объектов
+     */
+    public void deleteAllDestroyed() {
+//        bulletPool.freeAllDestroyedActiveObjects();
+//        explosionPool.freeAllDestroyedActiveObjects();
+    }
+
+
     @Override
     public void dispose() {
         super.dispose();
@@ -88,7 +98,7 @@ public class OpenSpace extends Base2DScreen {
         if(keycode == 22) playa.actionRight();
         if(keycode == 21) playa.actionLeft();
         if(keycode == 19) playa.actionPiupiu();
-        System.out.println(keycode);
+//        System.out.println(keycode);
         return false;
     }
 
@@ -101,7 +111,7 @@ public class OpenSpace extends Base2DScreen {
 
     @Override
     public boolean keyTyped(char character) {
-        System.out.println("keyTyped character = " + character);
+//        System.out.println("keyTyped character = " + character);
         return false;
     }
 

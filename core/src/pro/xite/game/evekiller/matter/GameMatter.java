@@ -16,11 +16,17 @@ abstract public class GameMatter extends Rectangular implements SelfDrawable, Di
     SpriteBatch universe;
     protected  float scale = 1f;
     protected float angle;
+    private boolean isDestroyed;
+
 
 //    final Vector2 position = new Vector2();
 
     public void dispose() {
 //        texture.dispose();
+    }
+
+    public GameMatter() {
+
     }
 
     public GameMatter(String matterName) {
@@ -29,9 +35,9 @@ abstract public class GameMatter extends Rectangular implements SelfDrawable, Di
     }
 
 
-    public void draw() {
+    public void draw(SpriteBatch spriteBatch) {
 
-        universe.draw(
+        spriteBatch.draw(
                 this.texture, // текущий регион
                 getLeft(), getBottom(), //точка отрисовки
                 getCenterX(), getCenterY(), // точка вращения
@@ -41,12 +47,39 @@ abstract public class GameMatter extends Rectangular implements SelfDrawable, Di
         );
     }
 
+    public void draw() {
+        draw(universe);
+    }
+
+    public void update(float delta) {
+
+    }
+
 //    public void setPosition(float x, float y) {
 //        position.set(x, y);
 //    }
 
     public void resize(Rectangular worldBounds) {
 
+    }
+
+
+    public  void setHeightProportion(float height) {
+        setHeight(height);
+        float aspect = texture.getRegionWidth() / (float) texture.getRegionHeight();
+        setWidth(height * aspect);
+    }
+
+    public void destroy() {
+        this.isDestroyed = true;
+    }
+
+    public void flushDestroy() {
+        this.isDestroyed = false;
+    }
+
+    public boolean isDestroyed() {
+        return isDestroyed;
     }
 
 }
