@@ -20,28 +20,26 @@ import pro.xite.game.evekiller.app.Regions;
 
 public class Falcon extends GameMatter implements Movable {
 
-    private Rectangular worldBounds;
     Vector2 velocity = new Vector2();
 
     protected BulletPool bulletPool;
     protected TextureRegion bulletRegion;
 
 
-    public Falcon(SpriteBatch batch, Rectangular worldBounds) {
+    public Falcon(Universe batch) {
         super("main_ship");
-        bulletRegion = Singularity.bang("bulletMainShip");
-        TextureRegion[] regions = Regions.split(texture, 1, 2,2);
-        texture = regions[0];
         universe = batch;
-        this.worldBounds = worldBounds;
+        bulletRegion = Singularity.bang("bulletMainShip");
+        TextureRegion[] regions = Regions.split(textures[frame], 1, 2,2);
+        textures[frame] = regions[0];
+
+        float aspect = textures[frame].getRegionWidth() / (float) textures[frame].getRegionHeight();
         setWidth(35f);
-        float aspect = texture.getRegionWidth() / (float) texture.getRegionHeight();
         setHeight(35f / aspect);
-//        setCenter(worldBounds.getCenter());
-        getCenter().set(worldBounds.getCenter());
-        fix();
+        getCenter().set(universe.bounds.getCenter()); // FIXME possible bug point
+        fix(); // TODO !!!!
         setBottom(15f);
-        System.out.println(worldBounds);
+        System.out.println(universe.bounds);
         System.out.println(this);
 
         universe = batch;
@@ -76,7 +74,7 @@ public class Falcon extends GameMatter implements Movable {
 
     protected void shoot() {
         Bullet bullet = bulletPool.obtain();
-        bullet.set(this, bulletRegion, getCenter(), new Vector2(0,500f), 35f, worldBounds, 1);
+        bullet.set(this, bulletRegion, getCenter(), new Vector2(0,500f), 35f, universe.bounds, 1);
 //        if (shootSound.play() == -1) {
 //            throw new RuntimeException("shootSound.play() == -1");
 //        }

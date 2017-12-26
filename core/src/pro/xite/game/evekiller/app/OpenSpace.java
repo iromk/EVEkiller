@@ -16,26 +16,29 @@ import pro.xite.game.evekiller.matter.Star;
 
 public class OpenSpace extends Base2DScreen {
 
-//    oldUniverse universeBatch;
-//    Game game;
+    static final float WORLD_HEIGHT_IN_METERS = 600f;
+    static final int STARS = 102;
 
     FFAGalaxy ffaGalaxy;
     Star[] stars;
     Falcon playa;
-    static final int STARS = 102;
 
     public OpenSpace(Game game) {
         super(game);
-        ffaGalaxy = new FFAGalaxy(batch);
-        playa = new Falcon(batch, worldBounds);
+
+        universe.bounds.setHeight(WORLD_HEIGHT_IN_METERS);
+        System.out.println("openspace " + universe.bounds);
+
+        ffaGalaxy = new FFAGalaxy(universe);
+        playa = new Falcon(universe);
         stars = new Star[STARS];
 
         for (int i = 0; i < STARS; i++) {
             Indeterminacy.nextFloat(-1f, 1f);
-            stars[i] = new Star(batch, worldBounds);
+            stars[i] = new Star(universe);
         }
 //        this.game = game;
-//        batch = new SpriteBatch();
+//        universe = new SpriteBatch();
 //        Gdx.input.setInputProcessor(new GestureDetector(new MassEffect(universeBatch)));
     }
 
@@ -46,8 +49,8 @@ public class OpenSpace extends Base2DScreen {
         super.render(delta);
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.begin();
-//		batch.render();
+        universe.begin();
+//		universe.render();
         if(ffaGalaxy != null)
             ffaGalaxy.draw();
         for (int i = 0; i < STARS; i++) {
@@ -55,7 +58,7 @@ public class OpenSpace extends Base2DScreen {
             stars[i].draw();
         }
         playa.draw();
-        batch.end();
+        universe.end();
 //        game.setScreen(new MenuScreen(game));
     }
 
@@ -64,17 +67,17 @@ public class OpenSpace extends Base2DScreen {
     }
 
     @Override
-    protected void resize(Rectangular worldBounds) {
+    protected void resize() {
         if(ffaGalaxy != null)
-            ffaGalaxy.resize(worldBounds);
-        if(playa != null) playa.resize(worldBounds);
+            ffaGalaxy.resize(universe.bounds);
+        if(playa != null) playa.resize(universe.bounds);
 
 //        buttonExit.resize(worldBounds);
 //        buttonNewGame.resize(worldBounds);
         if(stars != null)
         for (int i = 0; i < STARS; i++) {
             if(stars[i] != null)
-                stars[i].resize(worldBounds);
+                stars[i].resize(universe.bounds);
         }
     }
 
@@ -90,7 +93,7 @@ public class OpenSpace extends Base2DScreen {
     @Override
     public void dispose() {
         super.dispose();
-        batch.dispose();
+        universe.dispose();
     }
 
     @Override

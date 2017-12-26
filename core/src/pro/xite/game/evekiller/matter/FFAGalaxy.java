@@ -18,20 +18,20 @@ public class FFAGalaxy extends GameMatter {
     TextureRegion crop;
     private float deltaScaleFactor = 0.2f;
 
-    public FFAGalaxy(SpriteBatch spriteBatch) {
+    public FFAGalaxy(Universe batch) {
         super("");
 
         Texture texture = new Texture(ffaGalaxyImageFilename);
-        this.universe = spriteBatch;
+        this.universe = batch;
 //        position = new Vector2(-200,-200);
-        this.texture = getRandomTextureRegion(texture);
+        this.textures[frame] = getRandomTextureRegion(texture);
     }
 
     @Override
     public void resize(Rectangular worldBounds) {
         float height = worldBounds.getHeight();
         setHeight(height);
-        float aspect = texture.getRegionWidth() / (float) texture.getRegionHeight();
+        float aspect = textures[frame].getRegionWidth() / (float) textures[frame].getRegionHeight();
         setWidth(height * aspect);
         getCenter().set(worldBounds.getCenter());
         fix();

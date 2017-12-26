@@ -16,17 +16,15 @@ public class Star extends GameMatter implements Movable {
     Vector2 velocity = new Vector2();
 
 
-    private Rectangular worldBounds;
 //    TextureRegion textureRegion;
 
-    public Star(SpriteBatch batch, Rectangular worldBounds) {
+    public Star(Universe batch) {
         super("star");
-//        texture = new TextureRegion(new Texture("deathstar.png"));
-        this.worldBounds = worldBounds;
+//        textures = new TextureRegion(new Texture("deathstar.png"));
 
         float stellarMagnitude = Indeterminacy.nextFloat(5.005f, 10.01f);
         setWidth(stellarMagnitude);
-        float aspect = texture.getRegionWidth() / (float) texture.getRegionHeight();
+        float aspect = textures[frame].getRegionWidth() / (float) textures[frame].getRegionHeight();
         setHeight(stellarMagnitude / aspect);
 
         universe = batch;
@@ -50,7 +48,7 @@ public class Star extends GameMatter implements Movable {
     private void stayInBounds() {
 //        if(getRight() < worldBounds.getLeft()) setLeft(worldBounds.getRight());
 //        if(getLeft() > worldBounds.getRight()) setRight(worldBounds.getLeft());
-        if(getTop() < worldBounds.getBottom()) setTop(worldBounds.getTop());
+        if(getTop() < universe.bounds.getBottom()) setTop(universe.bounds.getTop());
 //        if(getBottom() )
     }
 

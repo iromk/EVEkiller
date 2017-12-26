@@ -9,6 +9,7 @@ import pro.xite.game.evekiller.matter.DeathStar;
 import pro.xite.game.evekiller.matter.FFAGalaxy;
 import pro.xite.game.evekiller.matter.SelfDrawable;
 import pro.xite.game.evekiller.matter.Star;
+import pro.xite.game.evekiller.matter.Universe;
 
 /**
  * Created by Roman Syrchin on 12/8/17.
@@ -26,7 +27,7 @@ public class oldUniverse extends SpriteBatch {
 
     public oldUniverse() {
 //        deathStar = new DeathStar(this);
-        ffaGalaxy = new FFAGalaxy(this);
+        ffaGalaxy = new FFAGalaxy(new Universe());
         stars = new Star[11];
 //        for (int i = 0; i < stars.length; i++)
 //            stars[i] = new Star();

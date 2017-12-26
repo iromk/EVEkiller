@@ -12,8 +12,9 @@ import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
 
 abstract public class GameMatter extends Rectangular implements SelfDrawable, Disposable {
 
-    TextureRegion texture;
-    SpriteBatch universe;
+    TextureRegion[] textures;
+    int frame;
+    Universe universe;
     protected  float scale = 1f;
     protected float angle;
     private boolean isDestroyed;
@@ -22,7 +23,7 @@ abstract public class GameMatter extends Rectangular implements SelfDrawable, Di
 //    final Vector2 position = new Vector2();
 
     public void dispose() {
-//        texture.dispose();
+//        textures.dispose();
     }
 
     public GameMatter() {
@@ -30,7 +31,9 @@ abstract public class GameMatter extends Rectangular implements SelfDrawable, Di
     }
 
     public GameMatter(String matterName) {
-        texture = Singularity.bang(matterName);
+        textures = new TextureRegion[1];
+        frame = 0;
+        textures[0] = Singularity.bang(matterName);
 //        System.out.println("class >" + getClass().getName().split(".") );
     }
 
@@ -38,7 +41,7 @@ abstract public class GameMatter extends Rectangular implements SelfDrawable, Di
     public void draw(SpriteBatch spriteBatch) {
 
         spriteBatch.draw(
-                this.texture, // текущий регион
+                this.textures[frame], // текущий регион
                 getLeft(), getBottom(), //точка отрисовки
                 getCenterX(), getCenterY(), // точка вращения
                 getWidth(), getHeight(), // ширина и высота
@@ -66,7 +69,7 @@ abstract public class GameMatter extends Rectangular implements SelfDrawable, Di
 
     public  void setHeightProportion(float height) {
         setHeight(height);
-        float aspect = texture.getRegionWidth() / (float) texture.getRegionHeight();
+        float aspect = textures[frame].getRegionWidth() / (float) textures[frame].getRegionHeight();
         setWidth(height * aspect);
     }
 

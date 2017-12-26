@@ -1,6 +1,5 @@
 package pro.xite.game.evekiller.matter;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
 import pro.xite.game.evekiller.darkmatter.oldUniverse;
@@ -31,8 +30,8 @@ public class DeathStar extends GameMatter {
 
     public DeathStar(oldUniverse spriteBatch) {
         super("");
-//        this.texture = new Texture(deathstarImageFilename);
-//        cg = new Vector2(texture.getWidth()/2, texture.getHeight()/2);
+//        this.textures = new Texture(deathstarImageFilename);
+//        cg = new Vector2(textures.getWidth()/2, textures.getHeight()/2);
 //        this.universe = spriteBatch;
 //        position = new Vector2(universe.width, universe.height).scl(0.5f).sub(cg);
 //        v = 0f; a = 0f; delta = new Vector2();
@@ -43,7 +42,7 @@ public class DeathStar extends GameMatter {
     @Override
     public void draw() {
         move();
-        universe.draw(texture, position.x, position.y);
+        universe.draw(textures[frame], position.x, position.y);
     }
 
     private void move() {

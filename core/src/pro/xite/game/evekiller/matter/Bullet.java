@@ -18,7 +18,7 @@ public class Bullet extends GameMatter {
 
     public Bullet() {
         super("bulletMainShip");
-//        texture = new TextureRegion(); //[1];
+//        textures = new TextureRegion(); //[1];
     }
 
     public void set(
@@ -31,7 +31,7 @@ public class Bullet extends GameMatter {
             int damage
     ) {
         this.owner = owner;
-        this.texture = region;
+        this.textures[0] = region;
 //        this.regions[0] = region;
         getCenter().set(pos0); fix();
 //        this.pos.set(pos0);

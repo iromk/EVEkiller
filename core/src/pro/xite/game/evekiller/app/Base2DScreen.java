@@ -4,44 +4,46 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
 import pro.xite.game.evekiller.abstracts.MatrixUtils;
+import pro.xite.game.evekiller.matter.Universe;
 
 /**
  * Created by Roman Syrchin on 12/12/17.
  */
 
-abstract class Base2DScreen implements Screen, InputProcessor {
+abstract class Base2DScreen extends Rectangular implements Screen, InputProcessor {
 
     protected Game game;
-    private Rectangular screenBounds; // границы области рисования в пикселях
-    protected Rectangular worldBounds; // границы проекции мировых координат
+
+//    private Rectangular screenBounds; // границы области рисования в пикселях
+//    protected Rectangular worldBounds; // границы проекции мировых координат
     private Rectangular glBounds; // дефолтные границы проекции мир - gl
 
-    protected Matrix4 worldToGl;
-    protected Matrix3 screenToWorld;
+    private Matrix4 universeToGl;
+    private Matrix3 screenToUniverse;
 
     Vector2 touch = new Vector2();
 
-    protected SpriteBatch batch;
+    protected Universe universe;
 
 
     public Base2DScreen(Game game) {
-        this.game = game;
-        this.screenBounds = new Rectangular();
-        this.worldBounds = new Rectangular();
-        this.glBounds = new Rectangular(2f, 2f);
-        this.worldToGl = new Matrix4();
-        this.screenToWorld = new Matrix3();
-        if (this.batch != null) {
+        if (this.universe != null) {
             throw new RuntimeException("Повторная установка screen без dispose");
         }
-        this.batch = new SpriteBatch();
-        resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        this.game = game;
+        this.universe = new Universe();
+
+        this.glBounds = new Rectangular(2f, 2f);
+        this.universeToGl = new Matrix4();
+        this.screenToUniverse = new Matrix3();
+
+//        resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
     @Override
@@ -56,21 +58,22 @@ abstract class Base2DScreen implements Screen, InputProcessor {
 
     @Override
     public void resize(int width, int height) {
-        screenBounds.setSize(width, height);
-        screenBounds.setLeft(0);
-        screenBounds.setBottom(0);
+        set(0,0, width, height);
+//        System.out.println("vefore " + universe.bounds);
+        universe.bounds.setWidthByAspectRatio(width / (float) height);
 
-        float aspect = width / (float) height;
-        worldBounds.setHeight(600f);
-        worldBounds.setWidth(600f * aspect);
-        MatrixUtils.calcTransitionMatrix(worldToGl, worldBounds, glBounds);
-        batch.setProjectionMatrix(worldToGl);
+        MatrixUtils.calcTransitionMatrix(universeToGl, universe.bounds, glBounds);
+        universe.setProjectionMatrix(universeToGl);
+        MatrixUtils.calcTransitionMatrix(screenToUniverse, this, universe.bounds);
 
-        MatrixUtils.calcTransitionMatrix(screenToWorld, screenBounds, worldBounds);
-        resize(worldBounds);
+//        System.out.println(this);
+//        System.out.println(universe.bounds);
+//        System.out.println(glBounds);
+
+        resize();
     }
 
-    protected void resize(Rectangular worldBounds) {
+    protected void resize() {
 
     }
 

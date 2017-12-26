@@ -25,6 +25,15 @@ public class Rectangular extends Rectangle implements Projectable {
         y = vcenter.y - height / 2;
     }
 
+    public void setByHeightWithAspectRatio(float height, float ratio) {
+        this.height = height;
+        this.width = height * ratio;
+    }
+
+    public void setWidthByAspectRatio(float ratio) {
+        this.width = this.height * ratio;
+    }
+
     @Override
     public float getLeft() {
         return x;
