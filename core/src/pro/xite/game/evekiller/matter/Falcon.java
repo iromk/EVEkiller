@@ -16,18 +16,17 @@ import pro.xite.game.evekiller.darkmatter.Movable;
  * Created by Roman Syrchin on 12/22/17.
  */
 
-public class Falcon extends GameMatter implements Movable {
+public class Falcon extends GameMatter implements Movable, Shooter {
 
     static private final String FALCON_REF_NAME = "main_ship";
 
     Vector2 velocity = new Vector2();
     boolean moving = false;
     boolean shooting = false;
-    float shootingRate = 3/(float)60;
-    float reloading = 0f;
+
+    Weapon mainWeapon;
 
     protected BulletPool bulletPool;
-    protected TextureRegion bulletRegion;
 
 
     public Falcon(Universe batch) {
@@ -35,9 +34,8 @@ public class Falcon extends GameMatter implements Movable {
 //        super(REF_NAME);
         universe = batch;
 
-        textures = Singularity.bangAndDiffuse(FALCON_REF_NAME,1,2,2);
 
-        bulletRegion = Singularity.bang("bulletMainShip");
+        textures = Singularity.bangAndDiffuse(FALCON_REF_NAME,1,2,2);
 
         float aspect = textures[frame].getRegionWidth() / (float) textures[frame].getRegionHeight();
         setWidth(35f);
@@ -52,6 +50,7 @@ public class Falcon extends GameMatter implements Movable {
         setVelocity();
 
         this.bulletPool = new BulletPool();
+        mainWeapon = new PlasmaGun(this, universe, bulletPool);
 
     }
 
@@ -63,7 +62,6 @@ public class Falcon extends GameMatter implements Movable {
 
     @Override
     public void update(float delta) {
-        System.out.println(delta);
         if (moving) move(delta);
         if (shooting) shoot();
         bulletPool.updateActiveSprites(delta);
@@ -76,18 +74,7 @@ public class Falcon extends GameMatter implements Movable {
     }
 
     protected void shoot() {
-        if (reloading <= 0f) {
-            reloading = 1f;
-            Bullet bullet = bulletPool.obtain();
-            bullet.set(this, bulletRegion,
-                    getCenter(), new Vector2(0, 500f), 35f,
-                    universe.bounds, 1);
-        } else {
-            reloading -= shootingRate;
-        }
-//        if (shootSound.play() == -1) {
-//            throw new RuntimeException("shootSound.play() == -1");
-//        }
+        mainWeapon.shoot();
     }
 
     public void stopAction(int keycode) {
@@ -131,5 +118,10 @@ public class Falcon extends GameMatter implements Movable {
     @Override
     public void setVelocity() {
         velocity.setZero();
+    }
+
+    @Override
+    public Vector2 getGunpointPosition() {
+        return getCenter();
     }
 }

@@ -9,7 +9,7 @@ import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
  * Пуля
  */
 
-public class Bullet extends GameMatter {
+public class Bullet extends Ammo {
 
     private Rectangular worldBounds;
     private final Vector2 v = new Vector2();
@@ -17,7 +17,7 @@ public class Bullet extends GameMatter {
     private Object owner;
 
     public Bullet() {
-        super("bulletMainShip");
+        textures[0] = Singularity.bang("bulletMainShip");
 //        textures = new TextureRegion(); //[1];
     }
 
