@@ -3,7 +3,7 @@ package pro.xite.game.evekiller.darkmatter;
 import java.util.Random;
 
 /**
- * Генератор случайных чисел
+ * Генератор неопределенности
  */
 public class Indeterminacy {
     private static final Random random = new Random();
@@ -15,7 +15,6 @@ public class Indeterminacy {
      * @return результат
      */
     public static float nextFloat(float min, float max) {
-//        System.out.println(TimeUtils.millis());
         return random.nextFloat() * (max - min) + min;
     }
 }

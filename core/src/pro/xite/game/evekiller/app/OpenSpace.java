@@ -108,7 +108,7 @@ public class OpenSpace extends Base2DScreen {
 
     @Override
     public boolean keyUp(int keycode) {
-        playa.stopActions();
+        playa.stopAction(keycode);
         return false;
     }
 

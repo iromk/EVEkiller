@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import java.util.Dictionary;
 import java.util.HashMap;
 
+import pro.xite.game.evekiller.app.Regions;
+
 /**
  * Created by Roman Syrchin on 12/21/17.
  */
@@ -26,11 +28,19 @@ public class Singularity {
 //    }
 
 
-    public static TextureRegion bang(String s) {
-        if(objects.containsKey(s)) return objects.get(s);
-        TextureRegion brandnewTexture = atlas.findRegion(s);
-        objects.put(s, brandnewTexture);
+    public static TextureRegion bang(String name) {
+        if(objects.containsKey(name))
+            return objects.get(name);
+
+        TextureRegion brandnewTexture = atlas.findRegion(name);
+        objects.put(name, brandnewTexture);
+
         return brandnewTexture;
+    }
+
+    public static TextureRegion[] bangAndDiffuse(String name, int rows, int cols, int count) {
+
+        return Regions.split(bang(name), rows, cols, count);
     }
 
 }

@@ -27,7 +27,7 @@ abstract public class GameMatter extends Rectangular implements SelfDrawable, Di
     }
 
     public GameMatter() {
-
+        textures = new TextureRegion[1];
     }
 
     public GameMatter(String matterName) {

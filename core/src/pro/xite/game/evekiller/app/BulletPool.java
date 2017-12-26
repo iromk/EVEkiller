@@ -12,6 +12,6 @@ public class BulletPool extends MatterPool<Bullet> {
 
     @Override
     protected void debugLog() {
-        System.out.println("Bullet pool change active/free : " + activeObjects.size() + " / " + freeObjects.size());
+//        System.out.println("Bullet pool change active/free : " + activeObjects.size() + " / " + freeObjects.size());
     }
 }
