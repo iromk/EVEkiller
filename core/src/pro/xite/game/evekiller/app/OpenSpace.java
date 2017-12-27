@@ -6,9 +6,11 @@ import com.badlogic.gdx.graphics.GL20;
 
 import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
 import pro.xite.game.evekiller.darkmatter.Indeterminacy;
+import pro.xite.game.evekiller.matter.Bullet;
 import pro.xite.game.evekiller.matter.Enemy;
 import pro.xite.game.evekiller.matter.FFAGalaxy;
 import pro.xite.game.evekiller.matter.Falcon;
+import pro.xite.game.evekiller.matter.Plasma;
 import pro.xite.game.evekiller.matter.Star;
 
 /**
@@ -87,6 +89,35 @@ public class OpenSpace extends Base2DScreen {
 
         playa.update(delta);
         enemy.update(delta);
+
+        if(!overlaps(enemy)) {
+            enemy = null;
+            enemy = new Enemy(universe);
+        }
+
+        detectCollision();
+    }
+
+    private void detectCollision() {
+
+        for(Bullet bullet : universe.bulletPool.activeObjects) {
+            if(bullet.overlaps(enemy)) {
+                enemy.dealDamage(bullet.getDamage());
+                bullet.destroy();
+//                enemy.eliminated();
+            }
+        }
+        for(Plasma plasma : universe.plasmaPool.activeObjects) {
+            if(plasma.overlaps(enemy)) {
+                enemy.dealDamage(plasma.getDamage());
+                plasma.destroy();
+//                enemy.eliminated();
+            }
+        }
+
+        if(enemy.isDestroyed())
+            enemy = new Enemy(universe);
+
     }
 
     @Override

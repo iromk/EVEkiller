@@ -33,10 +33,13 @@ public abstract class MatterPool<T extends GameMatter> {
     public void updateActiveSprites(float delta) {
         for (int i = 0; i < activeObjects.size(); i++) {
             GameMatter sprite = activeObjects.get(i);
+/*
             if (sprite.isDestroyed()) {
                 throw new RuntimeException("Попытка обновления объекта, помеченного на удаление");
             }
-            sprite.update(delta);
+*/
+            if(!sprite.isDestroyed())
+                sprite.update(delta);
         }
     }
 
@@ -61,10 +64,11 @@ public abstract class MatterPool<T extends GameMatter> {
     public void drawActiveObjects(SpriteBatch batch) {
         for (int i = 0; i < activeObjects.size(); i++) {
             GameMatter sprite = activeObjects.get(i);
-            if (sprite.isDestroyed()) {
+/*            if (sprite.isDestroyed()) {
                 throw new RuntimeException("Попытка отрисовки объекта, помеченного на удаление");
-            }
-            sprite.draw(batch);
+            }*/
+            if (!sprite.isDestroyed())
+                sprite.draw(batch);
         }
     }
 

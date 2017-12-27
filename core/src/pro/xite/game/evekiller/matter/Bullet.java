@@ -52,19 +52,5 @@ public class Bullet extends Ammo {
         }
     }
 
-    public float getDamage() {
-        return damage;
-    }
 
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-
-    public Shooter getOwner() {
-        return shooter;
-    }
-
-    public void setOwner(Shooter owner) {
-        this.shooter = owner;
-    }
 }

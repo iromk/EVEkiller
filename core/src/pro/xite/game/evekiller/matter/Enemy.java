@@ -2,6 +2,7 @@ package pro.xite.game.evekiller.matter;
 
 import com.badlogic.gdx.math.Vector2;
 
+import pro.xite.game.evekiller.darkmatter.Indeterminacy;
 import pro.xite.game.evekiller.darkmatter.Movable;
 
 /**
@@ -11,6 +12,7 @@ import pro.xite.game.evekiller.darkmatter.Movable;
 public class Enemy extends GameMatter implements Movable, Shooter {
 
     protected Vector2 velocity;
+    float hitPoints;
 
     public Enemy(Universe batch) {
 
@@ -23,9 +25,11 @@ public class Enemy extends GameMatter implements Movable, Shooter {
         float aspect = textures[frame].getRegionWidth() / (float) textures[frame].getRegionHeight();
         setWidth(35f);
         setHeight(35f / aspect);
-        setCenter(universe.bounds.getCenter());
-        setBottom(500f);
+//        setCenter(universe.bounds.getCenter());
+        setX(Indeterminacy.nextFloat(35f, -35f + universe.bounds.width));
+        setBottom(600f);
         velocity = new Vector2();
+        hitPoints = 25;
 
         setVelocity();
 
@@ -33,6 +37,7 @@ public class Enemy extends GameMatter implements Movable, Shooter {
 
     @Override
     public void update(float delta) {
+        if(isDestroyed()) return;
 //        if (moving)
             move(delta);
 //        if (shooting) shoot();
@@ -41,8 +46,21 @@ public class Enemy extends GameMatter implements Movable, Shooter {
     }
 
     public void draw() {
+        if(isDestroyed()) return;
         super.draw();
 //        bulletPool.drawActiveObjects(universe);
+    }
+
+    public void dealDamage(float damage) {
+
+        System.out.println(hitPoints);
+
+        hitPoints -= damage;
+
+        if(hitPoints <= 0) destroy();
+
+        return;
+
     }
 
 

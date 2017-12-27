@@ -54,4 +54,20 @@ public class Ammo extends GameMatter {
     public void draw() {
         super.draw();
     }
+
+    public float getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    public Shooter getOwner() {
+        return shooter;
+    }
+
+    public void setOwner(Shooter owner) {
+        this.shooter = owner;
+    }
 }

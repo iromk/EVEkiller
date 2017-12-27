@@ -37,7 +37,7 @@ public class PlasmaGun extends Weapon {
             bullet.set(shooter, bulletRegion,
                     shooter.getPosition().add(slot), new Vector2(0, 500f),
                     35f,
-                    universe.bounds, 1);
+                    universe.bounds, 4);
         } else {
             reloading -= shootingRate;
         }
