@@ -38,10 +38,10 @@ public class FFAGalaxy extends GameMatter {
     }
 
     private TextureRegion getRandomTextureRegion(Texture texture) {
-        int x = (int)(Math.random() * (texture.getWidth() - Gdx.graphics.getWidth()) - 200) - 100;
-        int y = (int)(Math.random() * (texture.getHeight() - Gdx.graphics.getHeight()) - 200) - 100;
-//        int x = 0;
-//        int y = 0;
+//        int x = (int)(Math.random() * (texture.getWidth() - Gdx.graphics.getWidth()) - 200) - 100;
+//        int y = (int)(Math.random() * (texture.getHeight() - Gdx.graphics.getHeight()) - 200) - 100;
+        int x = (texture.getWidth() - Gdx.graphics.getWidth()*2);
+        int y = (texture.getHeight()/4);// - Gdx.graphics.getHeight());
 //TODO 100 and 200 consts need to replace with calculated values depending on gdx size and scale factor
 
         return new TextureRegion(texture, x, y, //1000,1000);

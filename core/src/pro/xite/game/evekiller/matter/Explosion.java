@@ -15,7 +15,6 @@ public class Explosion extends GameMatter implements Movable {
 
     public Explosion(Universe universe, Movable object) {
         textures = Singularity.bangAndDiffuse("explosion", 9, 9, 74);
-        System.out.println(textures.length);
         this.universe = universe;
         float aspect = textures[frame].getRegionWidth() / (float) textures[frame].getRegionHeight();
         setWidth(65f);
@@ -37,7 +36,6 @@ public class Explosion extends GameMatter implements Movable {
         if(frame == textures.length - 1) destroy();
         frame += 1;
         move(delta);
-        System.out.println(getCenter());
     }
 
     @Override

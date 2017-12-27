@@ -34,7 +34,6 @@ abstract public class GameMatter extends Rectangular implements SelfDrawable, Di
         textures = new TextureRegion[1];
         frame = 0;
         textures[0] = Singularity.bang(matterName);
-//        System.out.println("class >" + getClass().getName().split(".") );
     }
 
 
@@ -57,10 +56,6 @@ abstract public class GameMatter extends Rectangular implements SelfDrawable, Di
     public void update(float delta) {
 
     }
-
-//    public void setPosition(float x, float y) {
-//        position.set(x, y);
-//    }
 
     public void resize(Rectangular worldBounds) {
 

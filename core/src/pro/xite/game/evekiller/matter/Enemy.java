@@ -32,6 +32,7 @@ public class Enemy extends GameMatter implements Movable, Shooter {
         hitPoints = 15;
 
         setVelocity();
+        System.out.println("HOLD FIRE!!");
 
     }
 
