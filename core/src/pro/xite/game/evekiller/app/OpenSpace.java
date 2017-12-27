@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 
 import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
 import pro.xite.game.evekiller.darkmatter.Indeterminacy;
+import pro.xite.game.evekiller.matter.Enemy;
 import pro.xite.game.evekiller.matter.FFAGalaxy;
 import pro.xite.game.evekiller.matter.Falcon;
 import pro.xite.game.evekiller.matter.Star;
@@ -22,16 +23,20 @@ public class OpenSpace extends Base2DScreen {
     FFAGalaxy ffaGalaxy;
     Star[] stars;
     Falcon playa;
+    Enemy enemy;
 
     public OpenSpace(Game game) {
         super(game);
 
         universe.bounds.setHeight(WORLD_HEIGHT_IN_METERS);
+        resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
         System.out.println("openspace " + universe.bounds);
 
         ffaGalaxy = new FFAGalaxy(universe);
         playa = new Falcon(universe);
         stars = new Star[STARS];
+        enemy = new Enemy(universe);
 
         for (int i = 0; i < STARS; i++) {
             Indeterminacy.nextFloat(-1f, 1f);
@@ -58,12 +63,14 @@ public class OpenSpace extends Base2DScreen {
             stars[i].draw();
         }
         playa.draw();
+        enemy.draw();
         universe.end();
 //        game.setScreen(new MenuScreen(game));
     }
 
     public void update(float delta) {
         playa.update(delta);
+        enemy.update(delta);
     }
 
     @Override
@@ -79,6 +86,7 @@ public class OpenSpace extends Base2DScreen {
             if(stars[i] != null)
                 stars[i].resize(universe.bounds);
         }
+        if(enemy != null) enemy.resize(universe.bounds);
     }
 
     /**

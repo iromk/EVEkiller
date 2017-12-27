@@ -8,6 +8,8 @@ import com.badlogic.gdx.math.Vector2;
 
 public interface Shooter {
 
-    public Vector2 getGunpointPosition();
+    public Vector2 getPosition();
+
+    public Vector2 getWeaponSlotPosition();
 
 }

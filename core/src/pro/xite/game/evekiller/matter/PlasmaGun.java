@@ -15,12 +15,14 @@ public class PlasmaGun extends Weapon {
 
     BulletPool bulletPool;
     Universe universe;
+    Vector2 slot;
 
-    public PlasmaGun(Shooter shooter, Universe universe, BulletPool bulletPool) {
+    public PlasmaGun(Shooter shooter, Universe universe, BulletPool bulletPool, Vector2 slot) {
         bulletRegion = Singularity.bang("bulletMainShip");
         this.shooter = shooter;
         this.universe = universe;
         this.bulletPool = bulletPool;
+        this.slot = slot;
     }
 
     @Override
@@ -30,7 +32,8 @@ public class PlasmaGun extends Weapon {
             reloading = 1f;
             Bullet bullet = bulletPool.obtain();
             bullet.set(this, bulletRegion,
-                    shooter.getGunpointPosition(), new Vector2(0, 500f), 35f,
+                    shooter.getPosition().add(slot), new Vector2(0, 500f),
+                    35f,
                     universe.bounds, 1);
         } else {
             reloading -= shootingRate;

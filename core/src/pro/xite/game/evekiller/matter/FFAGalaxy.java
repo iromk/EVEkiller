@@ -33,8 +33,8 @@ public class FFAGalaxy extends GameMatter {
         setHeight(height);
         float aspect = textures[frame].getRegionWidth() / (float) textures[frame].getRegionHeight();
         setWidth(height * aspect);
-        getCenter().set(worldBounds.getCenter());
-        fix();
+        setCenter(worldBounds.getCenter());
+//        fix();
     }
 
     private TextureRegion getRandomTextureRegion(Texture texture) {
@@ -49,8 +49,8 @@ public class FFAGalaxy extends GameMatter {
     }
 
     public void moveTo(Vector2 delta) {
-        getCenter().sub(delta.scl(deltaScaleFactor));
-        fix();
+        setCenter(getCenter().sub(delta.scl(deltaScaleFactor)));
+//        fix();
     }
 
 }

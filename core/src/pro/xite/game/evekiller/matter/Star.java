@@ -42,8 +42,8 @@ public class Star extends GameMatter implements Movable {
 
     @Override
     public void move(float deltaTime) {
-        getCenter().mulAdd(velocity, deltaTime);
-        fix();
+        setCenter(getCenter().mulAdd(velocity, deltaTime));
+//        fix();
         stayInBounds();
     }
 

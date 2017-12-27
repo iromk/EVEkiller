@@ -33,7 +33,7 @@ public class Bullet extends Ammo {
         this.owner = owner;
         this.textures[0] = region;
 //        this.regions[0] = region;
-        getCenter().set(pos0); fix();
+        setCenter(pos0);// fix();
 //        this.pos.set(pos0);
         this.v.set(v0);
 //        setHeightProportion(height);
@@ -44,8 +44,8 @@ public class Bullet extends Ammo {
 
     @Override
     public void update(float deltaTime) {
-        getCenter().mulAdd(v, deltaTime);
-        fix();
+        setCenter(getCenter().mulAdd(v, deltaTime));
+//        fix();
 //        if (isOutside(worldBounds)) {
         if (!worldBounds.contains(this)) {
             destroy();

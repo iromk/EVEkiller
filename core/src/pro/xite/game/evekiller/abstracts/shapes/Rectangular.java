@@ -19,11 +19,10 @@ public class Rectangular extends Rectangle implements Projectable {
         super(-width / 2, -height / 2, width, height);
     }
 
-
-    public void fix() {
+ /*   public void fix() {
         x = vcenter.x - width / 2;
         y = vcenter.y - height / 2;
-    }
+    }*/
 
     public void setByHeightWithAspectRatio(float height, float ratio) {
         this.height = height;
@@ -66,6 +65,7 @@ public class Rectangular extends Rectangle implements Projectable {
 
     @Override
     public Vector2 getCenter() {
+        vcenter.set(x + width / 2 ,y + height / 2);
         return getCenter(vcenter);
     }
 

@@ -38,19 +38,17 @@ public class Falcon extends GameMatter implements Movable, Shooter {
         textures = Singularity.bangAndDiffuse(FALCON_REF_NAME,1,2,2);
 
         float aspect = textures[frame].getRegionWidth() / (float) textures[frame].getRegionHeight();
+        System.out.println(universe.bounds.getCenter());
         setWidth(35f);
         setHeight(35f / aspect);
-        getCenter().set(universe.bounds.getCenter()); // FIXME possible bug point
-        fix(); // TODO !!!!
+        setCenter(universe.bounds.getCenter()); // FIXME possible bug point
         setBottom(15f);
-        System.out.println(universe.bounds);
-        System.out.println(this);
 
-        universe = batch;
+//        universe = batch;
         setVelocity();
 
         this.bulletPool = new BulletPool();
-        mainWeapon = new PlasmaGun(this, universe, bulletPool);
+        mainWeapon = new PlasmaGun(this, universe, bulletPool, new Vector2(0,0));
 
     }
 
@@ -107,12 +105,12 @@ public class Falcon extends GameMatter implements Movable, Shooter {
 
     @Override
     public void move(float delta) {
-        getCenter().add(velocity);
+        setCenter(getCenter().add(velocity));
         if(velocity.len() > 0) {
             if (velocity.len() < 3) velocity.setLength(velocity.len()+0.03f);
 //            System.out.println(velocity);
         }
-        fix();
+//        fix();
     }
 
     @Override
@@ -121,7 +119,12 @@ public class Falcon extends GameMatter implements Movable, Shooter {
     }
 
     @Override
-    public Vector2 getGunpointPosition() {
+    public Vector2 getPosition() {
         return getCenter();
+    }
+
+    @Override
+    public Vector2 getWeaponSlotPosition() {
+        return null;
     }
 }
