@@ -11,18 +11,16 @@ import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
 
 public class Bullet extends Ammo {
 
-    private Rectangular worldBounds;
-    private final Vector2 v = new Vector2();
-    private  int damage;
-    private Object owner;
+//    private Object owner;
 
     public Bullet() {
-        textures[0] = Singularity.bang("bulletMainShip");
+//        textures[0] = Singularity.bang("bulletMainShip");
 //        textures = new TextureRegion(); //[1];
     }
 
+    @Override
     public void set(
-            Object owner,
+            Shooter owner,
             TextureRegion region,
             Vector2 pos0,
             Vector2 v0,
@@ -30,16 +28,18 @@ public class Bullet extends Ammo {
             Rectangular worldBounds,
             int damage
     ) {
-        this.owner = owner;
+        super.set(owner, region, pos0, v0, height, worldBounds, damage);
+/*        this.shooter = owner;
         this.textures[0] = region;
 //        this.regions[0] = region;
         setCenter(pos0);// fix();
 //        this.pos.set(pos0);
         this.v.set(v0);
 //        setHeightProportion(height);
-        setHeight(35f); setWidth(5f);
+        setHeight(height); setWidth(3f);
         this.worldBounds = worldBounds;
-        this.damage = damage;
+        this.damage = damage;*/
+        setWidth(3f);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class Bullet extends Ammo {
         }
     }
 
-    public int getDamage() {
+    public float getDamage() {
         return damage;
     }
 
@@ -60,11 +60,11 @@ public class Bullet extends Ammo {
         this.damage = damage;
     }
 
-    public Object getOwner() {
-        return owner;
+    public Shooter getOwner() {
+        return shooter;
     }
 
-    public void setOwner(Object owner) {
-        this.owner = owner;
+    public void setOwner(Shooter owner) {
+        this.shooter = owner;
     }
 }

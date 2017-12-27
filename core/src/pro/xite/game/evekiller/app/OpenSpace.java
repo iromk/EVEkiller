@@ -25,23 +25,31 @@ public class OpenSpace extends Base2DScreen {
     Falcon playa;
     Enemy enemy;
 
+
+
     public OpenSpace(Game game) {
         super(game);
 
         universe.bounds.setHeight(WORLD_HEIGHT_IN_METERS);
         resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        System.out.println("openspace " + universe.bounds);
+//        System.out.println("openspace " + universe.bounds);
+
+        universe.plasmaPool = new PlasmaPool();
+        universe.bulletPool = new BulletPool();
+
 
         ffaGalaxy = new FFAGalaxy(universe);
         playa = new Falcon(universe);
         stars = new Star[STARS];
         enemy = new Enemy(universe);
 
+
         for (int i = 0; i < STARS; i++) {
             Indeterminacy.nextFloat(-1f, 1f);
             stars[i] = new Star(universe);
         }
+
 //        this.game = game;
 //        universe = new SpriteBatch();
 //        Gdx.input.setInputProcessor(new GestureDetector(new MassEffect(universeBatch)));
@@ -64,11 +72,19 @@ public class OpenSpace extends Base2DScreen {
         }
         playa.draw();
         enemy.draw();
+        universe.plasmaPool.drawActiveObjects(universe);
+        universe.bulletPool.drawActiveObjects(universe);
+
         universe.end();
 //        game.setScreen(new MenuScreen(game));
     }
 
     public void update(float delta) {
+        universe.plasmaPool.updateActiveSprites(delta);
+        universe.plasmaPool.freeAllDestroyedActiveObjects();
+        universe.bulletPool.updateActiveSprites(delta);
+        universe.bulletPool.freeAllDestroyedActiveObjects();
+
         playa.update(delta);
         enemy.update(delta);
     }

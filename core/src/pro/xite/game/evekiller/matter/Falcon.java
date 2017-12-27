@@ -5,7 +5,6 @@ package pro.xite.game.evekiller.matter;
  */
 
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
@@ -24,7 +23,9 @@ public class Falcon extends GameMatter implements Movable, Shooter {
     boolean moving = false;
     boolean shooting = false;
 
-    Weapon mainWeapon;
+    Weapon leftWeapon;
+    Weapon rightWeapon;
+    Weapon centerWeapon;
 
     protected BulletPool bulletPool;
 
@@ -47,8 +48,11 @@ public class Falcon extends GameMatter implements Movable, Shooter {
 //        universe = batch;
         setVelocity();
 
-        this.bulletPool = new BulletPool();
-        mainWeapon = new PlasmaGun(this, universe, bulletPool, new Vector2(0,0));
+//        this.bulletPool = new BulletPool();
+//        leftWeapon = new PlasmaGun(this, universe, bulletPool, new Vector2(0,0));
+        leftWeapon = new PlasmaGun(this, universe, universe.plasmaPool, new Vector2(-15f,0), 1/(float)60, 0f);
+        rightWeapon = new PlasmaGun(this, universe, universe.plasmaPool, new Vector2(15f,0), 1/(float)60, 1f);
+        centerWeapon = new GatlingGun(this, universe, universe.bulletPool, new Vector2(0f,0), 6/(float)60, 0f);
 
     }
 
@@ -62,17 +66,19 @@ public class Falcon extends GameMatter implements Movable, Shooter {
     public void update(float delta) {
         if (moving) move(delta);
         if (shooting) shoot();
-        bulletPool.updateActiveSprites(delta);
-        bulletPool.freeAllDestroyedActiveObjects();
+//        bulletPool.updateActiveSprites(delta);
+//        bulletPool.freeAllDestroyedActiveObjects();
     }
 
     public void draw() {
         super.draw();
-        bulletPool.drawActiveObjects(universe);
+//        bulletPool.drawActiveObjects(universe);
     }
 
     protected void shoot() {
-        mainWeapon.shoot();
+        leftWeapon.shoot();
+        rightWeapon.shoot();
+        centerWeapon.shoot();
     }
 
     public void stopAction(int keycode) {

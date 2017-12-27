@@ -3,6 +3,8 @@ package pro.xite.game.evekiller.matter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
+import pro.xite.game.evekiller.app.BulletPool;
+import pro.xite.game.evekiller.app.PlasmaPool;
 
 /**
  * Created by Roman Syrchin on 12/26/17.
@@ -11,6 +13,9 @@ import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
 public class Universe extends SpriteBatch {
 
     public Rectangular bounds;
+
+    public PlasmaPool plasmaPool;
+    public BulletPool bulletPool;
 
     public Universe() {
         super();

@@ -3,23 +3,23 @@ package pro.xite.game.evekiller.matter;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
+import pro.xite.game.evekiller.app.BulletPool;
 import pro.xite.game.evekiller.app.PlasmaPool;
 
 /**
- * Created by Roman Syrchin on 12/26/17.
+ * Created by Roman Syrchin on 12/27/17.
  */
 
-public class PlasmaGun extends Weapon {
-
+public class GatlingGun extends Weapon {
     protected TextureRegion bulletRegion;
 
-    PlasmaPool bulletPool;
+    BulletPool bulletPool;
     Universe universe;
     Vector2 slot;
 
-    public PlasmaGun(Shooter shooter, Universe universe, PlasmaPool bulletPool, Vector2 slot,
+    public GatlingGun(Shooter shooter, Universe universe, BulletPool bulletPool, Vector2 slot,
                      float rate, float reloaing) {
-        bulletRegion = Singularity.bang("bulletEnemy");
+        bulletRegion = Singularity.bang("bulletMainShip");
         this.shooter = shooter;
         this.universe = universe;
         this.bulletPool = bulletPool;
@@ -33,18 +33,17 @@ public class PlasmaGun extends Weapon {
         super.shoot();
         if (reloading <= 0f) {
             reloading = 1f;
-            Plasma bullet = bulletPool.obtain();
+            Bullet bullet = bulletPool.obtain();
             bullet.set(shooter, bulletRegion,
-                    shooter.getPosition().add(slot), new Vector2(0, 500f),
-                    35f,
+                    shooter.getPosition().add(slot), new Vector2(0, 800f),
+                    12f,
                     universe.bounds, 1);
         } else {
             reloading -= shootingRate;
         }
-    //        if (shootSound.play() == -1) {
-    //            throw new RuntimeException("shootSound.play() == -1");
-    //        }
+        //        if (shootSound.play() == -1) {
+        //            throw new RuntimeException("shootSound.play() == -1");
+        //        }
     }
-
 
 }
