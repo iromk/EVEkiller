@@ -8,6 +8,7 @@ import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
 import pro.xite.game.evekiller.darkmatter.Indeterminacy;
 import pro.xite.game.evekiller.matter.Bullet;
 import pro.xite.game.evekiller.matter.Enemy;
+import pro.xite.game.evekiller.matter.Explosion;
 import pro.xite.game.evekiller.matter.FFAGalaxy;
 import pro.xite.game.evekiller.matter.Falcon;
 import pro.xite.game.evekiller.matter.Plasma;
@@ -26,6 +27,7 @@ public class OpenSpace extends Base2DScreen {
     Star[] stars;
     Falcon playa;
     Enemy enemy;
+    Explosion explosion;
 
 
 
@@ -45,7 +47,7 @@ public class OpenSpace extends Base2DScreen {
         playa = new Falcon(universe);
         stars = new Star[STARS];
         enemy = new Enemy(universe);
-
+//        explosion = new Explosion(universe);
 
         for (int i = 0; i < STARS; i++) {
             Indeterminacy.nextFloat(-1f, 1f);
@@ -74,6 +76,8 @@ public class OpenSpace extends Base2DScreen {
         }
         playa.draw();
         enemy.draw();
+        if(explosion != null) explosion.draw();
+
         universe.plasmaPool.drawActiveObjects(universe);
         universe.bulletPool.drawActiveObjects(universe);
 
@@ -89,6 +93,10 @@ public class OpenSpace extends Base2DScreen {
 
         playa.update(delta);
         enemy.update(delta);
+        if(explosion != null) {
+            explosion.update(delta);
+            if(explosion.isDestroyed()) explosion = null;
+        }
 
         if(!overlaps(enemy)) {
             enemy = null;
@@ -115,8 +123,10 @@ public class OpenSpace extends Base2DScreen {
             }
         }
 
-        if(enemy.isDestroyed())
+        if(enemy.isDestroyed()) {
+            explosion = new Explosion(universe, enemy);
             enemy = new Enemy(universe);
+        }
 
     }
 
@@ -134,6 +144,8 @@ public class OpenSpace extends Base2DScreen {
                 stars[i].resize(universe.bounds);
         }
         if(enemy != null) enemy.resize(universe.bounds);
+
+        if(explosion != null) explosion.resize(universe.bounds);
     }
 
     /**

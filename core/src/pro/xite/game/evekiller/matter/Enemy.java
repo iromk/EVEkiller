@@ -29,7 +29,7 @@ public class Enemy extends GameMatter implements Movable, Shooter {
         setX(Indeterminacy.nextFloat(35f, -35f + universe.bounds.width));
         setBottom(600f);
         velocity = new Vector2();
-        hitPoints = 25;
+        hitPoints = 15;
 
         setVelocity();
 
@@ -88,5 +88,10 @@ public class Enemy extends GameMatter implements Movable, Shooter {
     @Override
     public void setVelocity() {
         velocity.set(0, 2f);
+    }
+
+    @Override
+    public Vector2 getVelocity(Vector2 newVelocity) {
+        return newVelocity.set(velocity.x, velocity.y);
     }
 }

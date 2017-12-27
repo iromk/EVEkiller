@@ -125,6 +125,11 @@ public class Falcon extends GameMatter implements Movable, Shooter {
     }
 
     @Override
+    public Vector2 getVelocity(Vector2 velocity) {
+        return null;
+    }
+
+    @Override
     public Vector2 getPosition() {
         return getCenter();
     }

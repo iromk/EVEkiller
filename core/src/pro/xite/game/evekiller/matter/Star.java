@@ -63,4 +63,9 @@ public class Star extends GameMatter implements Movable {
         velocity.set(vx, vy);
 //        velocity.set(Indeterminacy.nextFloat(-0.5f, 0.5f), Indeterminacy.nextFloat(-0.5f, -0.1f));
     }
+
+    @Override
+    public Vector2 getVelocity(Vector2 velocity) {
+        return null;
+    }
 }

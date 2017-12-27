@@ -14,5 +14,7 @@ public interface Movable {
     public void move(float delta);
 
     void setVelocity();
+    Vector2 getVelocity(Vector2 velocity);
+    Vector2 getCenter();
 
 }
