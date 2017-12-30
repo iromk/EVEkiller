@@ -1,7 +1,7 @@
 package pro.xite.game.evekiller.app;
 
 
-import pro.xite.game.evekiller.matter.Bullet;
+import pro.xite.game.evekiller.matter.blueprints.arsenal.Bullet;
 
 public class BulletPool extends MatterPool<Bullet> {
 

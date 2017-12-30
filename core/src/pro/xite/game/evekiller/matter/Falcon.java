@@ -7,15 +7,20 @@ package pro.xite.game.evekiller.matter;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 
+import pro.xite.game.evekiller.abstracts.behaviours.Shooter;
 import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
 import pro.xite.game.evekiller.app.BulletPool;
-import pro.xite.game.evekiller.darkmatter.Movable;
+import pro.xite.game.evekiller.abstracts.behaviours.Movable;
+import pro.xite.game.evekiller.darkmatter.Singularity;
+import pro.xite.game.evekiller.matter.blueprints.arsenal.GatlingGun;
+import pro.xite.game.evekiller.matter.blueprints.arsenal.PlasmaGun;
+import pro.xite.game.evekiller.matter.blueprints.arsenal.Weapon;
 
 /**
  * Created by Roman Syrchin on 12/22/17.
  */
 
-public class Falcon extends GameMatter implements Movable, Shooter {
+public class Falcon extends Matter implements Movable, Shooter {
 
     static private final String FALCON_REF_NAME = "main_ship";
 

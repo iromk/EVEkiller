@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
-import pro.xite.game.evekiller.abstracts.MatrixUtils;
+import pro.xite.game.evekiller.abstracts.math.MatrixUtils;
 import pro.xite.game.evekiller.matter.Universe;
 
 /**

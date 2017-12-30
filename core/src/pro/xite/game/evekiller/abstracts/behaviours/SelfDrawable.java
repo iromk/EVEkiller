@@ -1,4 +1,4 @@
-package pro.xite.game.evekiller.matter;
+package pro.xite.game.evekiller.abstracts.behaviours;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 

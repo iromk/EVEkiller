@@ -2,14 +2,16 @@ package pro.xite.game.evekiller.matter;
 
 import com.badlogic.gdx.math.Vector2;
 
+import pro.xite.game.evekiller.abstracts.behaviours.Shooter;
 import pro.xite.game.evekiller.darkmatter.Indeterminacy;
-import pro.xite.game.evekiller.darkmatter.Movable;
+import pro.xite.game.evekiller.abstracts.behaviours.Movable;
+import pro.xite.game.evekiller.darkmatter.Singularity;
 
 /**
  * Created by Roman Syrchin on 12/26/17.
  */
 
-public class Enemy extends GameMatter implements Movable, Shooter {
+public class Enemy extends Matter implements Movable, Shooter {
 
     protected Vector2 velocity;
     float hitPoints;

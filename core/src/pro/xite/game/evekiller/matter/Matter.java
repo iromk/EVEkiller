@@ -4,17 +4,19 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Disposable;
 
+import pro.xite.game.evekiller.abstracts.behaviours.SelfDrawable;
 import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
+import pro.xite.game.evekiller.darkmatter.Singularity;
 
 /**
  * Created by Roman Syrchin on 12/8/17.
  */
 
-abstract public class GameMatter extends Rectangular implements SelfDrawable, Disposable {
+abstract public class Matter extends Rectangular implements SelfDrawable, Disposable {
 
-    TextureRegion[] textures;
-    int frame;
-    Universe universe;
+    public TextureRegion[] textures;
+    protected int frame;
+    protected Universe universe;
     protected  float scale = 1f;
     protected float angle;
     private boolean isDestroyed;
@@ -26,11 +28,11 @@ abstract public class GameMatter extends Rectangular implements SelfDrawable, Di
 //        textures.dispose();
     }
 
-    public GameMatter() {
+    public Matter() {
         textures = new TextureRegion[1];
     }
 
-    public GameMatter(String matterName) {
+    public Matter(String matterName) {
         textures = new TextureRegion[1];
         frame = 0;
         textures[0] = Singularity.bang(matterName);

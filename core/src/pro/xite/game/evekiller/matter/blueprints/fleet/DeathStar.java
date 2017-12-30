@@ -1,14 +1,15 @@
-package pro.xite.game.evekiller.matter;
+package pro.xite.game.evekiller.matter.blueprints.fleet;
 
 import com.badlogic.gdx.math.Vector2;
 
 import pro.xite.game.evekiller.darkmatter.oldUniverse;
+import pro.xite.game.evekiller.matter.Matter;
 
 /**
  * Created by Roman Syrchin on 12/6/17.
  */
 
-public class DeathStar extends GameMatter {
+public class DeathStar extends Matter {
 
     private static final String deathstarImageFilename = "deathstar.png";
 

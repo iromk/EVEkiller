@@ -1,15 +1,17 @@
-package pro.xite.game.evekiller.matter;
+package pro.xite.game.evekiller.matter.blueprints.arsenal;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
+import pro.xite.game.evekiller.matter.Matter;
+import pro.xite.game.evekiller.abstracts.behaviours.Shooter;
 
 /**
  * Created by Roman Syrchin on 12/26/17.
  */
 
-public class Ammo extends GameMatter {
+public class Ammo extends Matter {
 
     protected float damage;
 

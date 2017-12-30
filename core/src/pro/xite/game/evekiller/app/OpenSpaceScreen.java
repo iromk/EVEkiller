@@ -4,21 +4,20 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 
-import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
 import pro.xite.game.evekiller.darkmatter.Indeterminacy;
-import pro.xite.game.evekiller.matter.Bullet;
+import pro.xite.game.evekiller.matter.blueprints.arsenal.Bullet;
 import pro.xite.game.evekiller.matter.Enemy;
 import pro.xite.game.evekiller.matter.Explosion;
 import pro.xite.game.evekiller.matter.FFAGalaxy;
 import pro.xite.game.evekiller.matter.Falcon;
-import pro.xite.game.evekiller.matter.Plasma;
+import pro.xite.game.evekiller.matter.blueprints.arsenal.Plasma;
 import pro.xite.game.evekiller.matter.Star;
 
 /**
  * Created by Roman Syrchin on 12/12/17.
  */
 
-public class OpenSpace extends Base2DScreen {
+public class OpenSpaceScreen extends Base2DScreen {
 
     static final float WORLD_HEIGHT_IN_METERS = 600f;
     static final int STARS = 102;
@@ -31,7 +30,7 @@ public class OpenSpace extends Base2DScreen {
 
 
 
-    public OpenSpace(Game game) {
+    public OpenSpaceScreen(Game game) {
         super(game);
 
         universe.bounds.setHeight(WORLD_HEIGHT_IN_METERS);

@@ -1,7 +1,4 @@
-package pro.xite.game.evekiller.matter;
-
-import pro.xite.game.evekiller.matter.Ammo;
-import pro.xite.game.evekiller.matter.Singularity;
+package pro.xite.game.evekiller.matter.blueprints.arsenal;
 
 /**
  * Created by Roman Syrchin on 12/27/17.

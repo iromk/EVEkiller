@@ -2,14 +2,16 @@ package pro.xite.game.evekiller.app;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Ellipse;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
+
+import static com.badlogic.gdx.math.Interpolation.circle;
 
 /**
  * Created by Roman Syrchin on 12/11/17.
@@ -102,6 +104,10 @@ public class MenuScreen extends Base2DScreen {
         batch.draw(bgBsod, 0f,0f);//, 0,0, bgBsod.getWidth(), bgBsod.getHeight());
         menuItem1.draw(batch);
         menuItem2.draw(batch);
+        Ellipse circle = new Ellipse();
+//        circle.
+
+
         batch.end();
 //        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 //        Rectangle r = menuItem2.getBoundingRectangle();

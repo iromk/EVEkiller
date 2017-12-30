@@ -2,7 +2,7 @@ package pro.xite.game.evekiller;
 
 import com.badlogic.gdx.Game;
 
-import pro.xite.game.evekiller.app.OpenSpace;
+import pro.xite.game.evekiller.app.OpenSpaceScreen;
 
 /**
  * EVEkiller is a spaceshooter game.
@@ -16,7 +16,7 @@ public class EVEkiller extends Game {
 	@Override
 	public void create() {
 
-		setScreen(new OpenSpace(this));
+		setScreen(new OpenSpaceScreen(this));
 	}
 
 }

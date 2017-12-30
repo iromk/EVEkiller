@@ -1,17 +1,17 @@
 package pro.xite.game.evekiller.matter;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
 import pro.xite.game.evekiller.darkmatter.Indeterminacy;
-import pro.xite.game.evekiller.darkmatter.Movable;
+import pro.xite.game.evekiller.abstracts.behaviours.Movable;
+import pro.xite.game.evekiller.darkmatter.Singularity;
 
 /**
  * Created by Roman Syrchin on 12/21/17.
  */
 
-public class Star extends GameMatter implements Movable {
+public class Star extends Matter implements Movable {
 
     Vector2 velocity = new Vector2();
 

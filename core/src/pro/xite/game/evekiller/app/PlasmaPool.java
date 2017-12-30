@@ -1,6 +1,6 @@
 package pro.xite.game.evekiller.app;
 
-import pro.xite.game.evekiller.matter.Plasma;
+import pro.xite.game.evekiller.matter.blueprints.arsenal.Plasma;
 
 /**
  * Created by Roman Syrchin on 12/27/17.

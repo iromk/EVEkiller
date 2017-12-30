@@ -5,9 +5,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.util.ArrayList;
 import java.util.List;
 
-import pro.xite.game.evekiller.matter.GameMatter;
+import pro.xite.game.evekiller.matter.Matter;
 
-public abstract class MatterPool<T extends GameMatter> {
+public abstract class MatterPool<T extends Matter> {
 
     protected final List<T> activeObjects = new ArrayList<T>();
     protected final List<T> freeObjects = new ArrayList<T>();
@@ -32,7 +32,7 @@ public abstract class MatterPool<T extends GameMatter> {
      */
     public void updateActiveSprites(float delta) {
         for (int i = 0; i < activeObjects.size(); i++) {
-            GameMatter sprite = activeObjects.get(i);
+            Matter sprite = activeObjects.get(i);
 /*
             if (sprite.isDestroyed()) {
                 throw new RuntimeException("Попытка обновления объекта, помеченного на удаление");
@@ -63,7 +63,7 @@ public abstract class MatterPool<T extends GameMatter> {
      */
     public void drawActiveObjects(SpriteBatch batch) {
         for (int i = 0; i < activeObjects.size(); i++) {
-            GameMatter sprite = activeObjects.get(i);
+            Matter sprite = activeObjects.get(i);
 /*            if (sprite.isDestroyed()) {
                 throw new RuntimeException("Попытка отрисовки объекта, помеченного на удаление");
             }*/

@@ -2,7 +2,6 @@ package pro.xite.game.evekiller.matter;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
@@ -12,7 +11,7 @@ import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
  * Created by Roman Syrchin on 12/8/17.
  */
 
-public class FFAGalaxy extends GameMatter {
+public class FFAGalaxy extends Matter {
 
     static private final String ffaGalaxyImageFilename = "farfarawaygalaxy.jpg";
     TextureRegion crop;

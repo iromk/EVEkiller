@@ -1,4 +1,4 @@
-package pro.xite.game.evekiller.abstracts.shapes;
+package pro.xite.game.evekiller.abstracts.behaviours;
 
 import com.badlogic.gdx.math.Vector2;
 

@@ -1,4 +1,4 @@
-package pro.xite.game.evekiller.abstracts;
+package pro.xite.game.evekiller.abstracts.math;
 
 
 import com.badlogic.gdx.math.Matrix3;

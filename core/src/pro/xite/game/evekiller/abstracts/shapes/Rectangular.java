@@ -4,6 +4,8 @@ package pro.xite.game.evekiller.abstracts.shapes;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+import pro.xite.game.evekiller.abstracts.behaviours.Projectable;
+
 /**
  * Created by Roman Syrchin on 12/24/17.
  */

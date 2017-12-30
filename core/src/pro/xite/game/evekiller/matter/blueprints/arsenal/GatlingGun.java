@@ -1,10 +1,12 @@
-package pro.xite.game.evekiller.matter;
+package pro.xite.game.evekiller.matter.blueprints.arsenal;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 import pro.xite.game.evekiller.app.BulletPool;
-import pro.xite.game.evekiller.app.PlasmaPool;
+import pro.xite.game.evekiller.abstracts.behaviours.Shooter;
+import pro.xite.game.evekiller.darkmatter.Singularity;
+import pro.xite.game.evekiller.matter.Universe;
 
 /**
  * Created by Roman Syrchin on 12/27/17.
@@ -18,7 +20,7 @@ public class GatlingGun extends Weapon {
     Vector2 slot;
 
     public GatlingGun(Shooter shooter, Universe universe, BulletPool bulletPool, Vector2 slot,
-                     float rate, float reloaing) {
+                      float rate, float reloaing) {
         bulletRegion = Singularity.bang("bulletMainShip");
         this.shooter = shooter;
         this.universe = universe;

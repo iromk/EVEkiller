@@ -1,9 +1,10 @@
-package pro.xite.game.evekiller.matter;
+package pro.xite.game.evekiller.matter.blueprints.arsenal;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
+import pro.xite.game.evekiller.abstracts.behaviours.Shooter;
 
 /**
  * Пуля

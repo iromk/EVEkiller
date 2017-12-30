@@ -4,10 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
-import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
-import pro.xite.game.evekiller.matter.DeathStar;
+import pro.xite.game.evekiller.matter.blueprints.fleet.DeathStar;
 import pro.xite.game.evekiller.matter.FFAGalaxy;
-import pro.xite.game.evekiller.matter.SelfDrawable;
+import pro.xite.game.evekiller.abstracts.behaviours.SelfDrawable;
 import pro.xite.game.evekiller.matter.Star;
 import pro.xite.game.evekiller.matter.Universe;
 
