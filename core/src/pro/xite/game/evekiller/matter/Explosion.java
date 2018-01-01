@@ -81,9 +81,12 @@ public class Explosion extends Matter implements Movable {
     @Override
     public void update(float delta) {
         super.update(delta);
-        if(frame == textures.length - 1) destroy();
-        frame += 1;
-        move(delta);
+        if(frame == textures.length - 1)
+            destroy();
+        else {
+            frame += 1;
+            move(delta);
+        }
     }
 
     @Override
