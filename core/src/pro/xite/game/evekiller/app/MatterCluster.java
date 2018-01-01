@@ -7,12 +7,24 @@ import java.util.List;
 
 import pro.xite.game.evekiller.matter.Matter;
 
-public abstract class MatterPool<T extends Matter> {
+public abstract class MatterCluster<T extends Matter> {
 
     protected final List<T> activeObjects = new ArrayList<T>();
     protected final List<T> freeObjects = new ArrayList<T>();
 
     protected abstract T newObject();
+
+    public int size() {
+        return activeObjects.size();
+    }
+
+    public abstract Class getItemClass();
+
+    public T type() {
+        T tmp;
+        tmp = newObject();
+        return tmp;
+    }
 
     public T obtain() {
         T object;

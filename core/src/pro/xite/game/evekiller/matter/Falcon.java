@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import pro.xite.game.evekiller.abstracts.behaviours.Shooter;
 import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
-import pro.xite.game.evekiller.app.BulletPool;
+import pro.xite.game.evekiller.app.BulletCluster;
 import pro.xite.game.evekiller.abstracts.behaviours.Movable;
 import pro.xite.game.evekiller.darkmatter.Singularity;
 import pro.xite.game.evekiller.matter.blueprints.arsenal.GatlingGun;
@@ -32,7 +32,7 @@ public class Falcon extends Matter implements Movable, Shooter {
     Weapon rightWeapon;
     Weapon centerWeapon;
 
-    protected BulletPool bulletPool;
+    protected BulletCluster bulletPool;
 
 
     public Falcon(Universe batch) {
@@ -53,7 +53,7 @@ public class Falcon extends Matter implements Movable, Shooter {
 //        universe = batch;
         setVelocity();
 
-//        this.bulletPool = new BulletPool();
+//        this.bulletPool = new BulletCluster();
 //        leftWeapon = new PlasmaGun(this, universe, bulletPool, new Vector2(0,0));
         leftWeapon = new PlasmaGun(this, universe, universe.plasmaPool, new Vector2(-15f,0), 1/(float)60, 0f);
         rightWeapon = new PlasmaGun(this, universe, universe.plasmaPool, new Vector2(15f,0), 1/(float)60, 1f);

@@ -3,7 +3,7 @@ package pro.xite.game.evekiller.matter.blueprints.arsenal;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
-import pro.xite.game.evekiller.app.BulletPool;
+import pro.xite.game.evekiller.app.BulletCluster;
 import pro.xite.game.evekiller.abstracts.behaviours.Shooter;
 import pro.xite.game.evekiller.darkmatter.Singularity;
 import pro.xite.game.evekiller.matter.Universe;
@@ -15,11 +15,11 @@ import pro.xite.game.evekiller.matter.Universe;
 public class GatlingGun extends Weapon {
     protected TextureRegion bulletRegion;
 
-    BulletPool bulletPool;
+    BulletCluster bulletPool;
     Universe universe;
     Vector2 slot;
 
-    public GatlingGun(Shooter shooter, Universe universe, BulletPool bulletPool, Vector2 slot,
+    public GatlingGun(Shooter shooter, Universe universe, BulletCluster bulletPool, Vector2 slot,
                       float rate, float reloaing) {
         bulletRegion = Singularity.bang("bulletMainShip");
         this.shooter = shooter;

@@ -4,7 +4,9 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 
+import pro.xite.game.evekiller.darkmatter.SuperCluster;
 import pro.xite.game.evekiller.darkmatter.Indeterminacy;
+import pro.xite.game.evekiller.matter.blueprints.arsenal.Ammo;
 import pro.xite.game.evekiller.matter.blueprints.arsenal.Bullet;
 import pro.xite.game.evekiller.matter.Enemy;
 import pro.xite.game.evekiller.matter.Explosion;
@@ -12,6 +14,7 @@ import pro.xite.game.evekiller.matter.FFAGalaxy;
 import pro.xite.game.evekiller.matter.Falcon;
 import pro.xite.game.evekiller.matter.blueprints.arsenal.Plasma;
 import pro.xite.game.evekiller.matter.Star;
+import pro.xite.game.evekiller.matter.blueprints.fleet.Ship;
 
 /**
  * Created by Roman Syrchin on 12/12/17.
@@ -29,6 +32,7 @@ public class OpenSpaceScreen extends Base2DScreen {
     Explosion explosion;
 
 
+    SuperCluster superCluster;
 
     public OpenSpaceScreen(Game game) {
         super(game);
@@ -38,9 +42,16 @@ public class OpenSpaceScreen extends Base2DScreen {
 
 //        System.out.println("openspace " + universe.bounds);
 
-        universe.plasmaPool = new PlasmaPool();
-        universe.bulletPool = new BulletPool();
+        superCluster = new SuperCluster(universe);
 
+        universe.plasmaPool = new PlasmaCluster();
+        universe.bulletPool = new BulletCluster();
+
+//        universe.add(superCluster);
+//        superCluster.add(Plasma.class, )
+
+        superCluster.add(universe.bulletPool);
+        superCluster.add(universe.plasmaPool);
 
         ffaGalaxy = new FFAGalaxy(universe);
         playa = new Falcon(universe);
@@ -73,12 +84,26 @@ public class OpenSpaceScreen extends Base2DScreen {
             stars[i].move(delta);
             stars[i].draw();
         }
+
+        System.out.println("\n = = = = = = ");
+        SuperClusterIterator sci = superCluster.getIterator(Ammo.class);
+        int testcount = 0;
+        while(sci.hasNext()) {
+            testcount++;
+            System.out.println(sci.next().getClass());
+        }
+        System.out.println("total objs iterated: " + testcount);
+
         playa.draw();
         enemy.draw();
         if(explosion != null) explosion.draw();
 
-        universe.plasmaPool.drawActiveObjects(universe);
-        universe.bulletPool.drawActiveObjects(universe);
+//        universe.plasmaPool.drawActiveObjects(universe);
+//        universe.bulletPool.drawActiveObjects(universe);
+//        superCluster.stat(Ammo.class);
+        superCluster.drawActiveObjects(universe, Ammo.class);
+        //        universe.clusters.drawActiveObjects();
+//        universe.clusters.drawActiveObjects(Plasma.class);
 
         universe.end();
 //        game.setScreen(new MenuScreen(game));
@@ -106,6 +131,9 @@ public class OpenSpaceScreen extends Base2DScreen {
     }
 
     private void detectCollision() {
+
+//        superCluster.detectCollisions(Ammo, Ship);
+
 
         for(Bullet bullet : universe.bulletPool.activeObjects) {
             if(bullet.overlaps(enemy)) {

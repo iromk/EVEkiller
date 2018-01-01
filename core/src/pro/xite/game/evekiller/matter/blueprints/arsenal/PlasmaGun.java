@@ -3,7 +3,7 @@ package pro.xite.game.evekiller.matter.blueprints.arsenal;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
-import pro.xite.game.evekiller.app.PlasmaPool;
+import pro.xite.game.evekiller.app.PlasmaCluster;
 import pro.xite.game.evekiller.abstracts.behaviours.Shooter;
 import pro.xite.game.evekiller.darkmatter.Singularity;
 import pro.xite.game.evekiller.matter.Universe;
@@ -16,11 +16,11 @@ public class PlasmaGun extends Weapon {
 
     protected TextureRegion bulletRegion;
 
-    PlasmaPool bulletPool;
+    PlasmaCluster bulletPool;
     Universe universe;
     Vector2 slot;
 
-    public PlasmaGun(Shooter shooter, Universe universe, PlasmaPool bulletPool, Vector2 slot,
+    public PlasmaGun(Shooter shooter, Universe universe, PlasmaCluster bulletPool, Vector2 slot,
                      float rate, float reloaing) {
         bulletRegion = Singularity.bang("bulletEnemy");
         this.shooter = shooter;
