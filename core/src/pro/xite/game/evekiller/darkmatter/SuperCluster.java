@@ -54,11 +54,14 @@ public class SuperCluster {
         return new SuperClusterIterator(this, criteria);
     }
 
-    public MatterCluster get(Class clusterClass) {
-        return clustersByClasses.get(clusterClass);
+    public MatterCluster getCluster(Class clusterClass) {
+        for (List<Class> keyClassList: clustersByClasses.keySet())
+            if(keyClassList.contains(clusterClass))
+                return clustersByClasses.get(keyClassList);
+        return null;
     }
 
-    public MatterCluster get(List<Class> key) {
+    public MatterCluster getCluster(List<Class> key) {
         return clustersByClasses.get(key);
     }
 
@@ -68,7 +71,13 @@ public class SuperCluster {
         }
     }
 
-    public void drawActiveObjects(SpriteBatch universe, Class ofClass) {
+    public Matter obtain(Class objectClass) {
+        MatterCluster matterCluster = getCluster(objectClass);
+        if(matterCluster == null) return null;
+        return matterCluster.obtain();
+    }
+
+    public void drawActiveObjects(Class ofClass) {
         for(List<Class> classList: clustersByClasses.keySet()) {
             if(classList.contains(ofClass))
                 clustersByClasses.get(classList).drawActiveObjects(universe);

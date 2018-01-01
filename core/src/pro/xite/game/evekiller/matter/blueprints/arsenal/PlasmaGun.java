@@ -19,7 +19,7 @@ public class PlasmaGun extends Weapon {
     protected TextureRegion bulletRegion;
     Sound plasmaSound;
 
-    PlasmaCluster bulletPool;
+//    PlasmaCluster bulletPool;
     Universe universe;
     Vector2 slot;
 
@@ -30,7 +30,7 @@ public class PlasmaGun extends Weapon {
 
         this.shooter = shooter;
         this.universe = universe;
-        this.bulletPool = bulletPool;
+//        this.bulletPool = bulletPool;
         this.reloading = reloaing;
         this.shootingRate = rate;
         this.slot = slot;
@@ -41,8 +41,9 @@ public class PlasmaGun extends Weapon {
         super.shoot();
         if (reloading <= 0f) {
             reloading = 1f;
-            Plasma bullet = bulletPool.obtain();
-            bullet.set(shooter, bulletRegion,
+//            Plasma bullet = bulletPool.obtain();
+            Plasma plasma = (Plasma) universe.obtainFromSuperCluster(Plasma.class);
+            plasma.set(shooter, bulletRegion,
                     shooter.getPosition().add(slot), new Vector2(0, 500f),
                     35f,
                     universe.bounds, 4);

@@ -32,7 +32,7 @@ public class OpenSpaceScreen extends Base2DScreen {
     Explosion explosion;
 
 
-    SuperCluster superCluster;
+//    SuperCluster superCluster;
 
     public OpenSpaceScreen(Game game) {
         super(game);
@@ -42,7 +42,7 @@ public class OpenSpaceScreen extends Base2DScreen {
 
 //        System.out.println("openspace " + universe.bounds);
 
-        superCluster = new SuperCluster(universe);
+//        superCluster = new SuperCluster(universe);
 
         universe.plasmaPool = new PlasmaCluster();
         universe.bulletPool = new BulletCluster();
@@ -50,8 +50,11 @@ public class OpenSpaceScreen extends Base2DScreen {
 //        universe.add(superCluster);
 //        superCluster.add(Plasma.class, )
 
-        superCluster.add(universe.bulletPool);
-        superCluster.add(universe.plasmaPool);
+//        universe.set(superCluster);
+//        superCluster.add(universe.bulletPool);
+//        superCluster.add(universe.plasmaPool);
+        universe.add(universe.bulletPool);
+        universe.add(universe.plasmaPool);
 
         ffaGalaxy = new FFAGalaxy(universe);
         playa = new Falcon(universe);
@@ -86,7 +89,7 @@ public class OpenSpaceScreen extends Base2DScreen {
         }
 
         System.out.println("\n = = = = = = ");
-        SuperClusterIterator sci = superCluster.getIterator(Ammo.class);
+        SuperClusterIterator sci = universe.getSuperClusterIterator(Ammo.class);
         int testcount = 0;
         while(sci.hasNext()) {
             testcount++;
@@ -101,7 +104,8 @@ public class OpenSpaceScreen extends Base2DScreen {
 //        universe.plasmaPool.drawActiveObjects(universe);
 //        universe.bulletPool.drawActiveObjects(universe);
 //        superCluster.stat(Ammo.class);
-        superCluster.drawActiveObjects(universe, Ammo.class);
+//        superCluster.drawActiveObjects(universe, Ammo.class);
+        universe.drawActiveObjects(Ammo.class);
         //        universe.clusters.drawActiveObjects();
 //        universe.clusters.drawActiveObjects(Plasma.class);
 

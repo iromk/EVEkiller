@@ -35,7 +35,7 @@ public class SuperClusterIterator implements Iterator {
         while(classListIterator.hasNext()) {
             List<Class> nextClass = classListIterator.next();
             if(nextClass.contains(criteria)) {
-                matterClusterIterator = superCluster.get(nextClass).getActiveObjects().iterator();
+                matterClusterIterator = superCluster.getCluster(nextClass).getActiveObjects().iterator();
                 if(hasNext()) return true;
             }
         }

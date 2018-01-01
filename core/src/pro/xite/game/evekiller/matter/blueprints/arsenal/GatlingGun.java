@@ -19,7 +19,7 @@ public class GatlingGun extends Weapon {
 
     Sound bulletSound;
 
-    BulletCluster bulletPool;
+//    BulletCluster bulletPool;
     Universe universe;
     Vector2 slot;
 
@@ -30,7 +30,7 @@ public class GatlingGun extends Weapon {
 
         this.shooter = shooter;
         this.universe = universe;
-        this.bulletPool = bulletPool;
+//        this.bulletPool = bulletPool;
         this.reloading = reloaing;
         this.shootingRate = rate;
         this.slot = slot;
@@ -41,7 +41,8 @@ public class GatlingGun extends Weapon {
         super.shoot();
         if (reloading <= 0f) {
             reloading = 1f;
-            Bullet bullet = bulletPool.obtain();
+//            Bullet bullet = bulletPool.obtain();
+            Bullet bullet = (Bullet) universe.obtainFromSuperCluster(Bullet.class);
             bullet.set(shooter, bulletRegion,
                     shooter.getPosition().add(slot), new Vector2(0, 800f),
                     12f,
