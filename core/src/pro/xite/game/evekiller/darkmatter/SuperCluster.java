@@ -4,7 +4,9 @@ package pro.xite.game.evekiller.darkmatter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -26,23 +28,26 @@ public class SuperCluster {
         universe = spriteBatch;
     }
 
-    public void add(MatterCluster matterPool) {
+    public void add(MatterCluster matterCluster) {
         List<Class> classes = new ArrayList<Class>();
 
-        Class itemClass = matterPool.getItemClass();
+        Class itemClass = matterCluster.getItemClass();
         do {
             System.out.println("adding " + itemClass);
             classes.add(itemClass);
             itemClass = itemClass.getSuperclass();
         } while(itemClass != Matter.class);
 
+        clustersByClasses.put(classes, matterCluster);
+    }
+
+    public void add(MatterCluster... matterClusters) {
 /*
-        System.out.println("added " + matterPool.getItemClass() +
-                            " extends " + matterPool.getItemClass().getSuperclass() +
-                            " extends " + matterPool.getItemClass().getSuperclass().getSuperclass()
-        );
+        Iterator<MatterCluster> matterClustersIterator =  Arrays.asList(matterClusters).iterator();
+        while (matterClustersIterator.hasNext())
+            add(matterClustersIterator.next());
 */
-        clustersByClasses.put(classes, matterPool);
+        for (MatterCluster mc: matterClusters) add(mc);
 
     }
 
@@ -57,7 +62,7 @@ public class SuperCluster {
     public MatterCluster getCluster(Class clusterClass) {
         for (List<Class> keyClassList: clustersByClasses.keySet())
             if(keyClassList.contains(clusterClass))
-                return clustersByClasses.get(keyClassList);
+                return (MatterCluster) clustersByClasses.get(keyClassList);
         return null;
     }
 
@@ -75,6 +80,11 @@ public class SuperCluster {
         MatterCluster matterCluster = getCluster(objectClass);
         if(matterCluster == null) return null;
         return matterCluster.obtain();
+    }
+
+    public void update(float delta) {
+        for (MatterCluster mc: clustersByClasses.values())
+            mc.update(delta);
     }
 
     public void drawActiveObjects(Class ofClass) {

@@ -2,10 +2,6 @@ package pro.xite.game.evekiller.matter;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import java.util.Iterator;
-import java.util.Spliterator;
-import java.util.function.Consumer;
-
 import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
 import pro.xite.game.evekiller.app.BulletCluster;
 import pro.xite.game.evekiller.app.MatterCluster;
@@ -23,13 +19,26 @@ public class Universe extends SpriteBatch {
 
     SuperCluster superCluster;
 
-    public PlasmaCluster plasmaPool;
-    public BulletCluster bulletPool;
+//    public PlasmaCluster plasmaPool;
+//    public BulletCluster bulletPool;
 
     public Universe() {
         super();
         bounds = new Rectangular();
         superCluster = new SuperCluster(this);
+
+        setupClusters();
+    }
+
+    private void setupClusters() {
+        superCluster.add(
+                new BulletCluster(),
+                new PlasmaCluster()//,
+//                new StarCluster()
+//                new EnemyCluster(),
+//                new ExplosionCluster()
+
+                );
     }
 
     public Universe(Rectangular bounds) {
@@ -45,15 +54,23 @@ public class Universe extends SpriteBatch {
         return superCluster.getIterator(forClass);
     }
 
+    public MatterCluster getCluster(Class clusterClass) {
+        return superCluster.getCluster(clusterClass);
+    }
+
     public void add(MatterCluster matterCluster) {
         superCluster.add(matterCluster);
     }
 
-    public void drawActiveObjects(Class ofClass) {
+    public void draw(Class ofClass) {
         superCluster.drawActiveObjects(ofClass);
     }
 
-    public Matter obtainFromSuperCluster(Class objectClass) {
+    public void update(float delta) {
+        superCluster.update(delta);
+    }
+
+    public Matter obtainFromSupercluster(Class objectClass) {
         return superCluster.obtain(objectClass);
     }
 

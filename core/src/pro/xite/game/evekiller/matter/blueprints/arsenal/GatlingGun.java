@@ -19,18 +19,16 @@ public class GatlingGun extends Weapon {
 
     Sound bulletSound;
 
-//    BulletCluster bulletPool;
     Universe universe;
     Vector2 slot;
 
-    public GatlingGun(Shooter shooter, Universe universe, BulletCluster bulletPool, Vector2 slot,
+    public GatlingGun(Shooter shooter, Universe universe, Vector2 slot,
                       float rate, float reloaing) {
         bulletRegion = Singularity.bang("bulletMainShip");
         bulletSound = Gdx.audio.newSound(Gdx.files.internal("sounds/gun.wav"));
 
         this.shooter = shooter;
         this.universe = universe;
-//        this.bulletPool = bulletPool;
         this.reloading = reloaing;
         this.shootingRate = rate;
         this.slot = slot;
@@ -41,8 +39,7 @@ public class GatlingGun extends Weapon {
         super.shoot();
         if (reloading <= 0f) {
             reloading = 1f;
-//            Bullet bullet = bulletPool.obtain();
-            Bullet bullet = (Bullet) universe.obtainFromSuperCluster(Bullet.class);
+            Bullet bullet = (Bullet) universe.obtainFromSupercluster(Bullet.class);
             bullet.set(shooter, bulletRegion,
                     shooter.getPosition().add(slot), new Vector2(0, 800f),
                     12f,

@@ -38,6 +38,11 @@ public abstract class MatterCluster<T extends Matter> {
         return object;
     }
 
+    public void update(float delta) {
+        freeAllDestroyedActiveObjects();
+        updateActiveSprites(delta);
+    }
+
     /**
      * Обновление всех активных объектоа
      * @param delta

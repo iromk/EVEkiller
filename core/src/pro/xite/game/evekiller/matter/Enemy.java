@@ -51,7 +51,7 @@ public class Enemy extends Matter implements Movable, Shooter {
     public void draw() {
         if(isDestroyed()) return;
         super.draw();
-//        bulletPool.drawActiveObjects(universe);
+//        bulletPool.draw(universe);
     }
 
     public void dealDamage(float damage) {

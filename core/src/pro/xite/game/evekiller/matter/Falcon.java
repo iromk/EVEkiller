@@ -55,9 +55,9 @@ public class Falcon extends Matter implements Movable, Shooter {
 
 //        this.bulletPool = new BulletCluster();
 //        leftWeapon = new PlasmaGun(this, universe, bulletPool, new Vector2(0,0));
-        leftWeapon = new PlasmaGun(this, universe, universe.plasmaPool, new Vector2(-15f,0), 1/(float)60, 0f);
-        rightWeapon = new PlasmaGun(this, universe, universe.plasmaPool, new Vector2(15f,0), 1/(float)60, 1f);
-        centerWeapon = new GatlingGun(this, universe, universe.bulletPool, new Vector2(0f,0), 6/(float)60, 0f);
+        leftWeapon = new PlasmaGun(this, universe, new Vector2(-15f,0), 1/(float)60, 0f);
+        rightWeapon = new PlasmaGun(this, universe, new Vector2(15f,0), 1/(float)60, 1f);
+        centerWeapon = new GatlingGun(this, universe, new Vector2(0f,0), 6/(float)60, 0f);
 
     }
 
@@ -77,7 +77,7 @@ public class Falcon extends Matter implements Movable, Shooter {
 
     public void draw() {
         super.draw();
-//        bulletPool.drawActiveObjects(universe);
+//        bulletPool.draw(universe);
     }
 
     protected void shoot() {

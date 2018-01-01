@@ -19,18 +19,16 @@ public class PlasmaGun extends Weapon {
     protected TextureRegion bulletRegion;
     Sound plasmaSound;
 
-//    PlasmaCluster bulletPool;
     Universe universe;
     Vector2 slot;
 
-    public PlasmaGun(Shooter shooter, Universe universe, PlasmaCluster bulletPool, Vector2 slot,
+    public PlasmaGun(Shooter shooter, Universe universe, Vector2 slot,
                      float rate, float reloaing) {
         bulletRegion = Singularity.bang("bulletEnemy");
         plasmaSound =  Gdx.audio.newSound(Gdx.files.internal("sounds/flaunch.wav"));
 
         this.shooter = shooter;
         this.universe = universe;
-//        this.bulletPool = bulletPool;
         this.reloading = reloaing;
         this.shootingRate = rate;
         this.slot = slot;
@@ -41,8 +39,7 @@ public class PlasmaGun extends Weapon {
         super.shoot();
         if (reloading <= 0f) {
             reloading = 1f;
-//            Plasma bullet = bulletPool.obtain();
-            Plasma plasma = (Plasma) universe.obtainFromSuperCluster(Plasma.class);
+            Plasma plasma = (Plasma) universe.obtainFromSupercluster(Plasma.class);
             plasma.set(shooter, bulletRegion,
                     shooter.getPosition().add(slot), new Vector2(0, 500f),
                     35f,
