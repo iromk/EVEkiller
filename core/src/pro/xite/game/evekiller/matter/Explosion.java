@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 
 import pro.xite.game.evekiller.abstracts.behaviours.Movable;
+import pro.xite.game.evekiller.abstracts.behaviours.Projectable;
 import pro.xite.game.evekiller.darkmatter.Singularity;
 
 /**
@@ -13,22 +14,54 @@ import pro.xite.game.evekiller.darkmatter.Singularity;
 
 public class Explosion extends Matter implements Movable {
 
+    public static final float L = 65f;
+    public static final float XS = 15f;
+    public static final float XXS = 10f;
+
     protected Vector2 velocity;
     Sound explosionSound;
     boolean playingSound;
+    boolean silent;
 
-    public Explosion(Universe universe, Movable object) {
+    public Explosion(Universe universe, Movable explodedObject) {
+        setup(universe, explodedObject, 65f);
+    }
+
+    public Explosion() {
+    }
+
+    public void setup(Universe universe, Movable explodedObject, float width) {
+        setup(universe, explodedObject, width, (Vector2) null);
+    }
+
+    public void setup(Universe universe, Movable explodedObject, float width, Projectable position, float yshift) {
+        setup(universe, explodedObject, width, position.getCenter().add(0, yshift));
+    }
+
+    public void setup(Universe universe, Movable explodedObject, float width, Vector2 position) {
         textures = Singularity.bangAndDiffuse("explosion", 9, 9, 74);
         explosionSound = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion.wav"));
         playingSound = false;
+        frame = 0;
+        silent = false;
+
         this.universe = universe;
         float aspect = textures[frame].getRegionWidth() / (float) textures[frame].getRegionHeight();
-        setWidth(65f);
-        setHeight(65f / aspect);
-        setCenter(object.getCenter());
+
+        setWidth(width);
+        setHeight(width / aspect);
+        if(position != null)
+            setCenter(position);
+        else
+            setCenter(explodedObject.getCenter());
+
         frame = 0;
         velocity = new Vector2();
-        setVelocity(object.getVelocity(velocity));
+        setVelocity(explodedObject.getVelocity(velocity));
+    }
+
+    public void setSilent() {
+        silent = true;
     }
 
     @Override
@@ -39,7 +72,7 @@ public class Explosion extends Matter implements Movable {
     @Override
     public void draw() {
         super.draw();
-        if(!playingSound) {
+        if(!playingSound && !silent) {
             explosionSound.play();
             playingSound = true;
         }

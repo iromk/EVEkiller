@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
 import pro.xite.game.evekiller.app.BulletCluster;
+import pro.xite.game.evekiller.app.ExplosionCluster;
 import pro.xite.game.evekiller.app.MatterCluster;
 import pro.xite.game.evekiller.app.PlasmaCluster;
 import pro.xite.game.evekiller.app.SuperClusterIterator;
@@ -33,10 +34,10 @@ public class Universe extends SpriteBatch {
     private void setupClusters() {
         superCluster.add(
                 new BulletCluster(),
-                new PlasmaCluster()//,
+                new PlasmaCluster(),
+                new ExplosionCluster()
 //                new StarCluster()
 //                new EnemyCluster(),
-//                new ExplosionCluster()
 
                 );
     }

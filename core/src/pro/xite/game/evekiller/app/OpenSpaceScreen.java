@@ -38,12 +38,6 @@ public class OpenSpaceScreen extends Base2DScreen {
         universe.bounds.setHeight(WORLD_HEIGHT_IN_METERS);
         resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-//        universe.plasmaPool = new PlasmaCluster();
-//        universe.bulletPool = new BulletCluster();
-
-//        universe.add(universe.bulletPool);
-//        universe.add(universe.plasmaPool);
-
         ffaGalaxy = new FFAGalaxy(universe);
         playa = new Falcon(universe);
         stars = new Star[STARS];
@@ -90,27 +84,19 @@ public class OpenSpaceScreen extends Base2DScreen {
         enemy.draw();
         if(explosion != null) explosion.draw();
 
-//        universe.plasmaPool.draw(universe);
-//        universe.bulletPool.draw(universe);
-//        supercluster.stat(Ammo.class);
-//        supercluster.draw(universe, Ammo.class);
         universe.draw(Ammo.class);
-        //        universe.clusters.draw();
-//        universe.clusters.draw(Plasma.class);
+        universe.draw(Explosion.class);
 
         universe.end();
 //        game.setScreen(new MenuScreen(game));
     }
 
     public void update(float delta) {
-//        universe.plasmaPool.updateActiveSprites(delta);
-//        universe.plasmaPool.freeAllDestroyedActiveObjects();
-//        universe.bulletPool.updateActiveSprites(delta);
-//        universe.bulletPool.freeAllDestroyedActiveObjects();
         universe.update(delta);
 
         playa.update(delta);
         enemy.update(delta);
+
         if(explosion != null) {
             explosion.update(delta);
             if(explosion.isDestroyed()) explosion = null;
@@ -132,6 +118,9 @@ public class OpenSpaceScreen extends Base2DScreen {
         for(Bullet bullet : (List<Bullet>)universe.getCluster(Bullet.class).getActiveObjects()) {
             if(bullet.overlaps(enemy)) {
                 enemy.dealDamage(bullet.getDamage());
+                explosion = (Explosion) universe.obtainFromSupercluster(Explosion.class);
+                explosion.setup(universe, enemy, Explosion.XXS, bullet, 30f);
+                explosion.setSilent();
                 bullet.destroy();
 //                enemy.eliminated();
             }
@@ -139,13 +128,17 @@ public class OpenSpaceScreen extends Base2DScreen {
         for(Plasma plasma : (List<Plasma>) universe.getCluster(Plasma.class).getActiveObjects()) {
             if(plasma.overlaps(enemy)) {
                 enemy.dealDamage(plasma.getDamage());
+                explosion = (Explosion) universe.obtainFromSupercluster(Explosion.class);
+                explosion.setup(universe, enemy, Explosion.XS, plasma, 30f);
+                explosion.setSilent();
                 plasma.destroy();
 //                enemy.eliminated();
             }
         }
 
         if(enemy.isDestroyed()) {
-            explosion = new Explosion(universe, enemy);
+            explosion = (Explosion) universe.obtainFromSupercluster(Explosion.class);
+            explosion.setup(universe, enemy, Explosion.L);
             enemy = new Enemy(universe);
         }
 

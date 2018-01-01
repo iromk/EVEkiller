@@ -31,7 +31,7 @@ public class Enemy extends Matter implements Movable, Shooter {
         setX(Indeterminacy.nextFloat(35f, -35f + universe.bounds.width));
         setBottom(600f);
         velocity = new Vector2();
-        hitPoints = 15;
+        hitPoints = 35;
 
         setVelocity();
         System.out.println("HOLD FIRE!!");
@@ -90,7 +90,7 @@ public class Enemy extends Matter implements Movable, Shooter {
 
     @Override
     public void setVelocity() {
-        velocity.set(0, 2f);
+        velocity.set(0, 1f);
     }
 
     @Override
