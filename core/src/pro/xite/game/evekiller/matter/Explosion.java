@@ -1,5 +1,7 @@
 package pro.xite.game.evekiller.matter;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 
 import pro.xite.game.evekiller.abstracts.behaviours.Movable;
@@ -12,9 +14,13 @@ import pro.xite.game.evekiller.darkmatter.Singularity;
 public class Explosion extends Matter implements Movable {
 
     protected Vector2 velocity;
+    Sound explosionSound;
+    boolean playingSound;
 
     public Explosion(Universe universe, Movable object) {
         textures = Singularity.bangAndDiffuse("explosion", 9, 9, 74);
+        explosionSound = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion.wav"));
+        playingSound = false;
         this.universe = universe;
         float aspect = textures[frame].getRegionWidth() / (float) textures[frame].getRegionHeight();
         setWidth(65f);
@@ -28,6 +34,15 @@ public class Explosion extends Matter implements Movable {
     @Override
     public void move(float delta) {
         setCenter(getCenter().sub(velocity));
+    }
+
+    @Override
+    public void draw() {
+        super.draw();
+        if(!playingSound) {
+            explosionSound.play();
+            playingSound = true;
+        }
     }
 
     @Override
