@@ -42,7 +42,6 @@ public class OpenSpaceScreen extends Base2DScreen {
         playa = new Falcon(universe);
         stars = new Star[STARS];
         enemy = new Enemy(universe);
-//        explosion = new Explosion(universe);
 
         for (int i = 0; i < STARS; i++) {
             Indeterminacy.nextFloat(-1f, 1f);
@@ -57,10 +56,7 @@ public class OpenSpaceScreen extends Base2DScreen {
     @Override
     public void render(float delta) {
         update(delta);
-        deleteAllDestroyed();
         super.render(delta);
-        Gdx.gl.glClearColor(0, 0, 0, 0);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         universe.begin();
 //		universe.render();
@@ -96,11 +92,6 @@ public class OpenSpaceScreen extends Base2DScreen {
 
         playa.update(delta);
         enemy.update(delta);
-
-        if(explosion != null) {
-            explosion.update(delta);
-            if(explosion.isDestroyed()) explosion = null;
-        }
 
         if(!overlaps(enemy)) {
             enemy = null;
@@ -161,15 +152,6 @@ public class OpenSpaceScreen extends Base2DScreen {
 
         if(explosion != null) explosion.resize(universe.bounds);
     }
-
-    /**
-     * Удаление помеченных объектов
-     */
-    public void deleteAllDestroyed() {
-//        bulletPool.freeAllDestroyedActiveObjects();
-//        explosionPool.freeAllDestroyedActiveObjects();
-    }
-
 
     @Override
     public void dispose() {
