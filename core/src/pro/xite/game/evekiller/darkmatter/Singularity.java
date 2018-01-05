@@ -11,6 +11,7 @@ import java.util.HashMap;
 public class Singularity {
 
     private static HashMap<String, TextureRegion> objects = new HashMap<String, TextureRegion>();
+    private static HashMap<String, TextureRegion[]> objects2 = new HashMap<String, TextureRegion[]>();
 
 
     private static String mainAtlasTpack = "textures/mainAtlas.tpack";
@@ -28,8 +29,10 @@ public class Singularity {
 
     public static TextureRegion[] bangAndDiffuse(String name, int rows, int cols, int frames) {
 
+        if(!objects2.containsKey(name)) {
+
             TextureRegion region = bang(name);
-            if(region == null) throw new RuntimeException("Split null region");
+            if (region == null) throw new RuntimeException("Split null region");
 
             TextureRegion[] regions = new TextureRegion[frames];
             int tileWidth = region.getRegionWidth() / cols;
@@ -39,11 +42,13 @@ public class Singularity {
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < cols; j++) {
                     regions[frame] = new TextureRegion(region, tileWidth * j, tileHeight * i, tileWidth, tileHeight);
-                    if(frame == frames - 1) return regions;
+                    if (frame == frames - 1) return regions;
                     frame++;
                 }
             }
-            return regions;
+            objects2.put(name, regions);
+        }
+        return objects2.get(name);
     }
 
 }
