@@ -5,10 +5,10 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
-import pro.xite.game.evekiller.app.BulletCluster;
 import pro.xite.game.evekiller.abstracts.behaviours.Shooter;
 import pro.xite.game.evekiller.darkmatter.Singularity;
 import pro.xite.game.evekiller.matter.Universe;
+import pro.xite.game.evekiller.matter.blueprints.fleet.WeaponSlot;
 
 /**
  * Created by Roman Syrchin on 12/27/17.
@@ -32,6 +32,7 @@ public class GatlingGun extends Weapon {
         this.reloading = reloaing;
         this.shootingRate = rate;
         this.slot = slot;
+        this.fittingType = WeaponSlot.TYPE2_KINETIC;
     }
 
     @Override

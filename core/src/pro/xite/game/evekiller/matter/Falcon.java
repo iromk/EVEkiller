@@ -12,15 +12,18 @@ import pro.xite.game.evekiller.abstracts.shapes.Rectangular;
 import pro.xite.game.evekiller.app.BulletCluster;
 import pro.xite.game.evekiller.abstracts.behaviours.Movable;
 import pro.xite.game.evekiller.darkmatter.Singularity;
+import pro.xite.game.evekiller.matter.blueprints.AssaultShipBluePrint;
 import pro.xite.game.evekiller.matter.blueprints.arsenal.GatlingGun;
 import pro.xite.game.evekiller.matter.blueprints.arsenal.PlasmaGun;
 import pro.xite.game.evekiller.matter.blueprints.arsenal.Weapon;
+import pro.xite.game.evekiller.matter.blueprints.fleet.Ship;
+import pro.xite.game.evekiller.matter.blueprints.fleet.WeaponSlot;
 
 /**
  * Created by Roman Syrchin on 12/22/17.
  */
 
-public class Falcon extends Matter implements Movable, Shooter {
+public class Falcon extends Ship implements Movable, Shooter {
 
     static private final String FALCON_REF_NAME = "main_ship";
 
@@ -55,9 +58,14 @@ public class Falcon extends Matter implements Movable, Shooter {
 
 //        this.bulletPool = new BulletCluster();
 //        leftWeapon = new PlasmaGun(this, universe, bulletPool, new Vector2(0,0));
+        AssaultShipBluePrint bp = new AssaultShipBluePrint();
+        this.weaponSlots = bp.weaponSlots();
         leftWeapon = new PlasmaGun(this, universe, new Vector2(-15f,0), 1/(float)60, 0f);
         rightWeapon = new PlasmaGun(this, universe, new Vector2(15f,0), 1/(float)60, 1f);
         centerWeapon = new GatlingGun(this, universe, new Vector2(0f,0), 6/(float)60, 0f);
+        centerWeapon.setFittingType(WeaponSlot.UNIVERSAL);
+        leftWeapon.setFittingType(WeaponSlot.UNIVERSAL);
+        weaponSlots[0].attach(leftWeapon);
 
     }
 
@@ -81,9 +89,10 @@ public class Falcon extends Matter implements Movable, Shooter {
     }
 
     protected void shoot() {
-        leftWeapon.shoot();
-        rightWeapon.shoot();
-        centerWeapon.shoot();
+//        leftWeapon.shoot();
+//        rightWeapon.shoot();
+//        centerWeapon.shoot();
+        weaponSlots[0].weapon().shoot();
     }
 
     public void stopAction(int keycode) {
@@ -143,4 +152,5 @@ public class Falcon extends Matter implements Movable, Shooter {
     public Vector2 getWeaponSlotPosition() {
         return null;
     }
+
 }

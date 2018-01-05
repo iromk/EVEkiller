@@ -6,15 +6,15 @@ import pro.xite.game.evekiller.abstracts.behaviours.Shooter;
 import pro.xite.game.evekiller.darkmatter.Indeterminacy;
 import pro.xite.game.evekiller.abstracts.behaviours.Movable;
 import pro.xite.game.evekiller.darkmatter.Singularity;
+import pro.xite.game.evekiller.matter.blueprints.fleet.Ship;
 
 /**
  * Created by Roman Syrchin on 12/26/17.
  */
 
-public class Enemy extends Matter implements Movable, Shooter {
+public class Enemy extends Ship implements Movable, Shooter {
 
     protected Vector2 velocity;
-    float hitPoints;
 
     public Enemy(Universe batch) {
 
@@ -22,11 +22,11 @@ public class Enemy extends Matter implements Movable, Shooter {
 
         universe = batch;
 
-        textures = Singularity.bangAndDiffuse("enemy0", 1, 2, 2);
+        textures = Singularity.bangAndDiffuse("enemy1", 1, 2, 2);
 
         float aspect = textures[frame].getRegionWidth() / (float) textures[frame].getRegionHeight();
-        setWidth(35f);
-        setHeight(35f / aspect);
+        setWidth(65f);
+        setHeight(65f / aspect);
 //        setCenter(universe.bounds.getCenter());
         setX(Indeterminacy.nextFloat(35f, -35f + universe.bounds.width));
         setBottom(600f);
