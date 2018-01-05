@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import pro.xite.game.evekiller.matter.Matter;
 import pro.xite.game.evekiller.abstracts.behaviours.Movable;
 import pro.xite.game.evekiller.abstracts.behaviours.Shooter;
+import pro.xite.game.evekiller.matter.blueprints.arsenal.Weapon;
 
 /**
  * Created by Roman Syrchin on 12/30/17.
@@ -12,6 +13,9 @@ import pro.xite.game.evekiller.abstracts.behaviours.Shooter;
 
 public class Ship extends Matter implements Movable, Shooter {
 
+    public float hitPoints;
+    protected int weaponSlotsNumber;
+    protected WeaponSlot weaponSlots[];
 
     @Override
     public void move(float delta) {
@@ -36,5 +40,19 @@ public class Ship extends Matter implements Movable, Shooter {
     @Override
     public Vector2 getWeaponSlotPosition() {
         return null;
+    }
+
+    @Override
+    public int getWeaponSlotsNumber() {
+        return weaponSlotsNumber;
+    }
+
+    @Override
+    public boolean fitWeapon(Weapon weapon) {
+        for(WeaponSlot slot: weaponSlots) {
+           if(slot.fits(weapon))
+               slot.attach(weapon);
+        }
+        return false;
     }
 }
